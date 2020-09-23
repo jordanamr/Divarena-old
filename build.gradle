@@ -1,0 +1,83 @@
+plugins {
+    id "java"
+    id "nu.studer.jooq" version "5.1.0"
+    id "io.freefair.lombok" version "5.2.1"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+}
+
+group "org.divarena"
+version "0.0.1-dev"
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+jar {
+    enabled = false
+    manifest {
+        attributes "Main-Class": "org.divarena.Divarena"
+    }
+}
+
+shadowJar {
+    archiveFileName = "${baseName}-${version}.${extension}"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.slf4j:slf4j-api:1.7.30"
+    compile "ch.qos.logback:logback-classic:1.3.0-alpha5"
+    compile "com.typesafe:config:1.4.0"
+    compile "org.mariadb.jdbc:mariadb-java-client:2.6.2"
+    compile "org.jooq:jooq:3.13.4"
+    compile "com.github.jhg023:SimpleNet:1.6.6"
+
+    jooqGenerator "org.mariadb.jdbc:mariadb-java-client:2.6.2"
+}
+
+apply from: "database.gradle"
+
+jooq {
+    version = "3.13.4"
+    edition = nu.studer.gradle.jooq.JooqEdition.OSS
+
+    configurations {
+        main {
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.WARN
+                jdbc {
+                    driver = "org.mariadb.jdbc.Driver"
+                    url = "jdbc:mariadb://${databaseIp}:${databasePort}/"
+                    user = "${databaseUsername}"
+                    password = "${databasePassword}"
+                }
+                generator {
+                    name = "org.jooq.codegen.JavaGenerator"
+                    database {
+                        name = "org.jooq.meta.mariadb.MariaDBDatabase"
+                        inputSchema = "${databaseName}"
+                    }
+                    generate {
+                        daos = true
+                        pojos = true
+                        records = true
+                    }
+                    target {
+                        packageName = "org.divarena.database.generated"
+                        directory = "src/generated"
+                    }
+                    strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
+                }
+            }
+        }
+    }
+}
+
+build.dependsOn shadowJar

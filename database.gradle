@@ -1,0 +1,5 @@
+project.ext.databaseIp = "localhost"
+project.ext.databasePort = "3306"
+project.ext.databaseUsername = "root"
+project.ext.databasePassword = ""
+project.ext.databaseName = "divarena_db"
