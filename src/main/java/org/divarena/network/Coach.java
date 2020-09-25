@@ -52,7 +52,7 @@ public @Data class Coach {
             packet.putInt(x);
             packet.putInt(y);
             packet.putShort(z);
-            packet.putByte(3); //TODO Direction8
+            packet.putByte(1); //TODO Direction8
         }
 
         //unserializeLook
