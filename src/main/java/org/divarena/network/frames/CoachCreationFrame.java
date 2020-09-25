@@ -59,19 +59,23 @@ public class CoachCreationFrame extends Frame {
                     client.sendMessage(response, true);
                     return true;
                 }
+
                 Config config = Divarena.getInstance().getConfig();
-                DivarenaDatabase.getInstance().getDsl().insertInto(COACHES).set(COACHES.NAME, msg.getName())
-                        .set(COACHES.SKIN_COLOR, msg.getSkinColorIndex()).set(COACHES.HAIR_COLOR, msg.getHairColorIndex())
-                        .set(COACHES.SEX, msg.getSex()).set(COACHES.ACCOUNT_ID, client.getAccountId())
-                        .set(COACHES.INSTANCE, config.getInt("start.instanceId"))
-                        .set(COACHES.X, config.getInt("start.x"))
-                        .set(COACHES.Y, config.getInt("start.y"))
-                        .set(COACHES.Z, config.getInt("start.z"))
-                        .execute();
+                Coaches coachPojo = new Coaches();
+                coachPojo.setName(msg.getName());
+                coachPojo.setSkinColor(msg.getSkinColorIndex());
+                coachPojo.setHairColor(msg.getHairColorIndex());
+                coachPojo.setSex(msg.getSex());
+                coachPojo.setAccountId(client.getAccountId());
+                coachPojo.setInstance(config.getInt("start.instanceId"));
+                coachPojo.setX(config.getInt("start.x"));
+                coachPojo.setY(config.getInt("start.y"));
+                coachPojo.setZ(config.getInt("start.z"));
+                DivarenaDatabase.getInstance().getCoachesDao().insert(coachPojo);
+
                 response.setResultCode(CoachCreationResultMessage.ResultCode.SUCCESS.getCode());
                 client.sendMessage(response);
 
-                Coaches coachPojo = DivarenaDatabase.getInstance().getCoachesDao().fetchOne(COACHES.ACCOUNT_ID, client.getAccountId());
                 client.setCoach(new Coach(client, coachPojo));
                 client.sendMessage(new PlayerStatisticsReportMessage()); //TODO
                 client.sendMessage(new QueueNotificationMessage());
