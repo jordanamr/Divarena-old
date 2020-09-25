@@ -38,6 +38,7 @@ dependencies {
     compile "org.mariadb.jdbc:mariadb-java-client:2.6.2"
     compile "org.jooq:jooq:3.13.4"
     compile "com.github.jhg023:SimpleNet:1.6.6"
+    compile "at.favre.lib:bcrypt:0.9.0"
 
     jooqGenerator "org.mariadb.jdbc:mariadb-java-client:2.6.2"
 }

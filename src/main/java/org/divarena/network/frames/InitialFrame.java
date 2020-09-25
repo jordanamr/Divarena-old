@@ -1,5 +1,6 @@
 package org.divarena.network.frames;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.divarena.Divarena;
 import org.divarena.database.DivarenaDatabase;
 import org.divarena.database.generated.tables.pojos.Accounts;
@@ -8,11 +9,9 @@ import org.divarena.network.ArenaClient;
 import org.divarena.network.Coach;
 import org.divarena.network.Frame;
 import org.divarena.network.instances.Instance;
-import org.divarena.network.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.initial.ClientAuthenticationMessage;
 import org.divarena.protocol.client.initial.ClientVersionMessage;
-import org.divarena.protocol.server.coach.EnterInstanceMessage;
 import org.divarena.protocol.server.coach.PlayerStatisticsReportMessage;
 import org.divarena.protocol.server.initial.*;
 
@@ -40,7 +39,8 @@ public class InitialFrame extends Frame {
                 ClientAuthenticationMessage msg = (ClientAuthenticationMessage) message;
                 Accounts accountPojo = DivarenaDatabase.getInstance().getAccountsDao().fetchOneByUsername(msg.getUsername());
                 ClientAuthenticationResultsMessage response = new ClientAuthenticationResultsMessage();
-                if (accountPojo == null || !accountPojo.getPassword().equals(msg.getPassword())) {
+
+                if (accountPojo == null || !BCrypt.verifyer(BCrypt.Version.VERSION_2A).verify(msg.getPassword().toCharArray(), accountPojo.getPassword()).verified) {
                     response.setResultCode(ClientAuthenticationResultsMessage.ResultCode.INVALID_LOGIN.getCode());
                     client.sendMessage(response);
                     return true;
