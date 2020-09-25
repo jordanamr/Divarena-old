@@ -1,10 +1,11 @@
 package org.divarena.protocol.server.coach;
 
 import com.github.simplenet.packet.Packet;
+import lombok.Data;
 import lombok.Getter;
 import org.divarena.protocol.Message;
 
-public class PlayerStatisticsReportMessage extends Message {
+public @Data class PlayerStatisticsReportMessage extends Message {
 
     public PlayerStatisticsReportMessage() {
         this.id = 2400;

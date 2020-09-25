@@ -1,10 +1,11 @@
 package org.divarena.protocol.server.coach;
 
 import com.github.simplenet.packet.Packet;
+import lombok.Data;
 import org.divarena.network.Coach;
 import org.divarena.protocol.Message;
 
-public class EnterInstanceMessage extends Message {
+public @Data class EnterInstanceMessage extends Message {
 
     private final Coach coach;
 

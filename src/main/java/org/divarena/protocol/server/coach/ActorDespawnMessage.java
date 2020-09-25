@@ -1,13 +1,14 @@
 package org.divarena.protocol.server.coach;
 
 import com.github.simplenet.packet.Packet;
+import lombok.Data;
 import org.divarena.network.Coach;
 import org.divarena.protocol.Message;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public class ActorDespawnMessage extends Message {
+public @Data class ActorDespawnMessage extends Message {
 
     private final Collection<Coach> coaches;
 

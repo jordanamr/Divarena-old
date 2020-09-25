@@ -1,12 +1,13 @@
 package org.divarena.protocol.server.coach;
 
 import com.github.simplenet.packet.Packet;
+import lombok.Data;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.coach.CoachActorMovementRequestMessage;
 
 import java.util.Map;
 
-public class ActorMovementMessage extends Message {
+public @Data class ActorMovementMessage extends Message {
 
     private final long actorId;
     private final Map<Integer, CoachActorMovementRequestMessage.PathStep> movement;

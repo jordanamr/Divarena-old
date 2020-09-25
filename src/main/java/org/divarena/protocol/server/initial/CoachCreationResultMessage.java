@@ -20,7 +20,7 @@ public @Data class CoachCreationResultMessage extends Message {
         return packet;
     }
 
-    public enum ResultCode {
+    public enum Code {
         SUCCESS((byte) 0),
         INVALID_NAME((byte) 12),
         ERROR((byte) 13);
@@ -28,7 +28,7 @@ public @Data class CoachCreationResultMessage extends Message {
         @Getter
         private final byte code;
 
-        ResultCode(byte code) {
+        Code(byte code) {
             this.code = code;
         }
     }

@@ -12,7 +12,6 @@ import org.divarena.protocol.Message;
 import org.divarena.protocol.client.initial.CoachCreationMessage;
 import org.divarena.protocol.server.coach.PlayerStatisticsReportMessage;
 import org.divarena.protocol.server.initial.CoachCreationResultMessage;
-import org.divarena.protocol.server.initial.CoachInformationsMessage;
 import org.divarena.protocol.server.initial.QueueNotificationMessage;
 import org.divarena.util.StringUtils;
 
@@ -30,7 +29,7 @@ public class CoachCreationFrame extends Frame {
                 CoachCreationMessage msg = (CoachCreationMessage) message;
                 CoachCreationResultMessage response = new CoachCreationResultMessage();
                 if (!StringUtils.isValidCoachName(msg.getName())) {
-                    response.setResultCode(CoachCreationResultMessage.ResultCode.INVALID_NAME.getCode());
+                    response.setResultCode(CoachCreationResultMessage.Code.INVALID_NAME.getCode());
                     client.sendMessage(response);
                     return true;
                 }
@@ -45,17 +44,17 @@ public class CoachCreationFrame extends Frame {
                     invalidData = true;
                 }
                 if (invalidData) {
-                    response.setResultCode(CoachCreationResultMessage.ResultCode.ERROR.getCode());
+                    response.setResultCode(CoachCreationResultMessage.Code.ERROR.getCode());
                     client.sendMessage(response);
                     return true;
                 }
                 if (DivarenaDatabase.getInstance().getDsl().select(COACHES.ID).from(COACHES).where(COACHES.NAME.eq(msg.getName())).fetchOne() != null) {
-                    response.setResultCode(CoachCreationResultMessage.ResultCode.INVALID_NAME.getCode());
+                    response.setResultCode(CoachCreationResultMessage.Code.INVALID_NAME.getCode());
                     client.sendMessage(response);
                     return true;
                 }
                 if (DivarenaDatabase.getInstance().getDsl().select(COACHES.ID).from(COACHES).where(COACHES.ACCOUNT_ID.eq(client.getAccountId())).fetchOne() != null) {
-                    response.setResultCode(CoachCreationResultMessage.ResultCode.ERROR.getCode());
+                    response.setResultCode(CoachCreationResultMessage.Code.ERROR.getCode());
                     client.sendMessage(response, true);
                     return true;
                 }
@@ -73,7 +72,7 @@ public class CoachCreationFrame extends Frame {
                 coachPojo.setZ(config.getInt("start.z"));
                 DivarenaDatabase.getInstance().getCoachesDao().insert(coachPojo);
 
-                response.setResultCode(CoachCreationResultMessage.ResultCode.SUCCESS.getCode());
+                response.setResultCode(CoachCreationResultMessage.Code.SUCCESS.getCode());
                 client.sendMessage(response);
 
                 client.setCoach(new Coach(client, coachPojo));
