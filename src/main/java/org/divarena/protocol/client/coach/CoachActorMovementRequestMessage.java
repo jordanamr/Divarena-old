@@ -4,7 +4,6 @@ import lombok.Getter;
 import org.divarena.protocol.Message;
 
 import java.nio.ByteBuffer;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public class CoachActorMovementRequestMessage extends Message {
@@ -34,11 +33,11 @@ public class CoachActorMovementRequestMessage extends Message {
     public static class PathStep {
 
         @Getter
-        private int x;
+        private final int x;
         @Getter
-        private int y;
+        private final int y;
         @Getter
-        private short z;
+        private final short z;
 
         public PathStep(int x, int y, short z) {
             this.x = x;
