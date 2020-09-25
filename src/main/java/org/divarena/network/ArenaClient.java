@@ -85,6 +85,7 @@ public class ArenaClient {
                     log("Unhandled message. Full header: " + Arrays.toString(header) + " Message: " + Arrays.toString(data));
                     disconnect();
                 }
+                log("Handled message : " + message.getClass().getSimpleName());
             });
         });
     }
@@ -94,7 +95,7 @@ public class ArenaClient {
     }
 
     public void sendMessage(Message message, boolean thenClose) {
-        log("Sending message : " + message.getClass());
+        log("Sending message : " + message.getClass().getSimpleName());
         Packet packet = message.encode();
         packet.prepend(prepend -> {
             prepend.putShort(packet.getSize() + 4);
