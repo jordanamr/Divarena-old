@@ -1,4 +1,4 @@
-package org.divarena.protocol.client;
+package org.divarena.protocol.client.initial;
 
 import lombok.Getter;
 import org.divarena.protocol.Message;

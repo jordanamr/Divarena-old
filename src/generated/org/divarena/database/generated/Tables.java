@@ -5,6 +5,7 @@ package org.divarena.database.generated;
 
 
 import org.divarena.database.generated.tables.Accounts;
+import org.divarena.database.generated.tables.Coaches;
 
 
 /**
@@ -17,4 +18,9 @@ public class Tables {
      * The table <code>divarena_db.accounts</code>.
      */
     public static final Accounts ACCOUNTS = Accounts.ACCOUNTS;
+
+    /**
+     * The table <code>divarena_db.coaches</code>.
+     */
+    public static final Coaches COACHES = Coaches.COACHES;
 }

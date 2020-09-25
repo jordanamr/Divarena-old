@@ -8,19 +8,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.divarena.database.DivarenaDatabase;
 import org.divarena.logging.UncaughtExceptionLogger;
 import org.divarena.network.ArenaClient;
+import org.divarena.network.instances.Instance;
+import org.divarena.network.instances.WorldInstance;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 public class Divarena {
 
-    public static final boolean debug = false;
+    public static final boolean debug = true;
     private static Divarena instance = null;
 
-    private static Divarena getInstance() {
+    public static Divarena getInstance() {
         if (instance == null) instance = new Divarena();
         return instance;
     }
@@ -36,9 +36,11 @@ public class Divarena {
     private DivarenaDatabase database;
     @Getter
     private final List<ArenaClient> clients;
+    private final Map<Integer, WorldInstance> worldInstances;
 
     private Divarena() {
         clients = Collections.synchronizedList(new ArrayList<>());
+        worldInstances = Collections.synchronizedMap(new HashMap<>());
     }
 
     private void start() {
@@ -49,6 +51,9 @@ public class Divarena {
         database = new DivarenaDatabase(config.getString("database.address"), config.getString("database.username"),
                 config.getString("database.password"), config.getString("database.name"), config.getInt("database.poolSize"));
         database.connect();
+
+        log.info("Loading WorldInstance ID 0...");
+        worldInstances.put(0, new WorldInstance(0));
 
         Server server = new Server();
         server.onConnect(netClient -> {
@@ -65,4 +70,14 @@ public class Divarena {
         });
         server.bind(config.getString("network.bind.ip"), config.getInt("network.bind.port"));
     }
+
+    public Instance getWorldInstance(int id) {
+        return worldInstances.get(id);
+    }
+
+    public void removeClient(ArenaClient client) {
+        clients.remove(client);
+    }
+
+
 }

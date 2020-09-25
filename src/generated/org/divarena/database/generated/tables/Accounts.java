@@ -31,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Accounts extends TableImpl<AccountsRecord> {
 
-    private static final long serialVersionUID = -949106813;
+    private static final long serialVersionUID = 693080428;
 
     /**
      * The reference instance of <code>divarena_db.accounts</code>
@@ -111,7 +111,7 @@ public class Accounts extends TableImpl<AccountsRecord> {
 
     @Override
     public List<UniqueKey<AccountsRecord>> getKeys() {
-        return Arrays.<UniqueKey<AccountsRecord>>asList(Keys.KEY_ACCOUNTS_PRIMARY);
+        return Arrays.<UniqueKey<AccountsRecord>>asList(Keys.KEY_ACCOUNTS_PRIMARY, Keys.KEY_ACCOUNTS_USERNAME);
     }
 
     @Override

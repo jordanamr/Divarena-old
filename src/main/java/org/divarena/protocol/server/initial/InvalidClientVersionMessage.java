@@ -1,4 +1,4 @@
-package org.divarena.protocol.server;
+package org.divarena.protocol.server.initial;
 
 import com.github.simplenet.packet.Packet;
 import lombok.Data;

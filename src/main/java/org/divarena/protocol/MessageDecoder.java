@@ -2,8 +2,10 @@ package org.divarena.protocol;
 
 import lombok.extern.slf4j.Slf4j;
 import org.divarena.network.ArenaClient;
-import org.divarena.protocol.client.ClientAuthenticationMessage;
-import org.divarena.protocol.client.ClientVersionMessage;
+import org.divarena.protocol.client.coach.CoachActorMovementRequestMessage;
+import org.divarena.protocol.client.initial.ClientAuthenticationMessage;
+import org.divarena.protocol.client.initial.ClientVersionMessage;
+import org.divarena.protocol.client.initial.CoachCreationMessage;
 
 import java.util.Arrays;
 
@@ -28,6 +30,14 @@ public class MessageDecoder {
             }
             case 1025: {
                 msg = new ClientAuthenticationMessage();
+                break;
+            }
+            case 2049: {
+                msg = new CoachCreationMessage();
+                break;
+            }
+            case 4501: {
+                msg = new CoachActorMovementRequestMessage();
                 break;
             }
         }

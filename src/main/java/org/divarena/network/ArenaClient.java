@@ -2,31 +2,56 @@ package org.divarena.network;
 
 import com.github.simplenet.Client;
 import com.github.simplenet.packet.Packet;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.divarena.Divarena;
 import org.divarena.network.frames.InitialFrame;
+import org.divarena.network.frames.WorldFrame;
+import org.divarena.network.instances.Instance;
+import org.divarena.network.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.MessageDecoder;
+import org.divarena.protocol.server.coach.EnterInstanceMessage;
+import org.divarena.protocol.server.initial.CoachInformationsMessage;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 public class ArenaClient {
 
     private final Client netClient;
     private final String clientIp;
+
+    @Getter @Setter
+    private int accountId;
+    @Getter @Setter
+    private String accountName;
+    @Getter
+    private Coach coach;
+    @Getter
+    private Instance instance;
+
     private final List<Frame> registeredFrames;
 
     public ArenaClient(Client netClient, String clientIp) {
         this.netClient = netClient;
         this.clientIp = clientIp;
         this.registeredFrames = Collections.synchronizedList(new ArrayList<>());
-        this.registeredFrames.add(new InitialFrame(this));
+        this.registerFrame(new InitialFrame(this));
 
         log("connected!");
+        netClient.preDisconnect(() -> {
+            log("disconnecting...");
+            Divarena.getInstance().removeClient(this);
+            if (coach == null) return;
+            log("saving coach...");
+            coach.save();
+            if (instance == null) return;
+            log("leaving instance...");
+            instance.removeMember(coach);
+        });
         netClient.postDisconnect(() -> log("disconnected!"));
 
         netClient.readBytesAlways(5, header -> {
@@ -69,6 +94,7 @@ public class ArenaClient {
     }
 
     public void sendMessage(Message message, boolean thenClose) {
+        log("Sending message : " + message.getClass());
         Packet packet = message.encode();
         packet.prepend(prepend -> {
             prepend.putShort(packet.getSize() + 4);
@@ -91,5 +117,27 @@ public class ArenaClient {
 
     public void log(String message) {
         log.info("[" + clientIp + "] " + message);
+    }
+
+    public void registerFrame(Frame frame) {
+        this.registeredFrames.add(frame);
+    }
+
+    public void unregisterFrame(Class<? extends Frame> frame) {
+        this.registeredFrames.removeIf(curFrame -> curFrame.getClass().equals(frame));
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
+        sendMessage(new CoachInformationsMessage(coach));
+    }
+
+    public void enterInstance(Instance instance) {
+        if (instance instanceof WorldInstance) {
+            sendMessage(new EnterInstanceMessage(coach));
+            this.instance = instance;
+            instance.addMember(coach);
+            registerFrame(new WorldFrame(this)); //TODO
+        }
     }
 }

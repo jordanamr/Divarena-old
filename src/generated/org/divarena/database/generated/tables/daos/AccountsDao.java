@@ -73,6 +73,13 @@ public class AccountsDao extends DAOImpl<AccountsRecord, org.divarena.database.g
     }
 
     /**
+     * Fetch a unique record that has <code>username = value</code>
+     */
+    public org.divarena.database.generated.tables.pojos.Accounts fetchOneByUsername(String value) {
+        return fetchOne(Accounts.ACCOUNTS.USERNAME, value);
+    }
+
+    /**
      * Fetch records that have <code>password BETWEEN lowerInclusive AND upperInclusive</code>
      */
     public List<org.divarena.database.generated.tables.pojos.Accounts> fetchRangeOfPassword(String lowerInclusive, String upperInclusive) {
