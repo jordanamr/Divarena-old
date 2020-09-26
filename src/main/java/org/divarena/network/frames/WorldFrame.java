@@ -3,7 +3,7 @@ package org.divarena.network.frames;
 import lombok.extern.slf4j.Slf4j;
 import org.divarena.network.ArenaClient;
 import org.divarena.network.Frame;
-import org.divarena.network.instances.WorldInstance;
+import org.divarena.game.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
 

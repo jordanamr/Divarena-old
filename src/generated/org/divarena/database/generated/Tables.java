@@ -5,7 +5,9 @@ package org.divarena.database.generated;
 
 
 import org.divarena.database.generated.tables.Accounts;
+import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
+import org.divarena.database.generated.tables.FighterCards;
 
 
 /**
@@ -20,7 +22,17 @@ public class Tables {
     public static final Accounts ACCOUNTS = Accounts.ACCOUNTS;
 
     /**
+     * The table <code>divarena_db.coach_cards</code>.
+     */
+    public static final CoachCards COACH_CARDS = CoachCards.COACH_CARDS;
+
+    /**
      * The table <code>divarena_db.coaches</code>.
      */
     public static final Coaches COACHES = Coaches.COACHES;
+
+    /**
+     * The table <code>divarena_db.fighter_cards</code>.
+     */
+    public static final FighterCards FIGHTER_CARDS = FighterCards.FIGHTER_CARDS;
 }

@@ -8,7 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.divarena.database.generated.tables.Accounts;
+import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
+import org.divarena.database.generated.tables.FighterCards;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
@@ -20,7 +22,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DivarenaDb extends SchemaImpl {
 
-    private static final long serialVersionUID = -817191867;
+    private static final long serialVersionUID = 1862351617;
 
     /**
      * The reference instance of <code>divarena_db</code>
@@ -33,9 +35,19 @@ public class DivarenaDb extends SchemaImpl {
     public final Accounts ACCOUNTS = Accounts.ACCOUNTS;
 
     /**
+     * The table <code>divarena_db.coach_cards</code>.
+     */
+    public final CoachCards COACH_CARDS = CoachCards.COACH_CARDS;
+
+    /**
      * The table <code>divarena_db.coaches</code>.
      */
     public final Coaches COACHES = Coaches.COACHES;
+
+    /**
+     * The table <code>divarena_db.fighter_cards</code>.
+     */
+    public final FighterCards FIGHTER_CARDS = FighterCards.FIGHTER_CARDS;
 
     /**
      * No further instances allowed
@@ -54,6 +66,8 @@ public class DivarenaDb extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
             Accounts.ACCOUNTS,
-            Coaches.COACHES);
+            CoachCards.COACH_CARDS,
+            Coaches.COACHES,
+            FighterCards.FIGHTER_CARDS);
     }
 }

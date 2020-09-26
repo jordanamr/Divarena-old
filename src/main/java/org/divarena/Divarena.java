@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.divarena.database.DivarenaDatabase;
 import org.divarena.logging.UncaughtExceptionLogger;
 import org.divarena.network.ArenaClient;
-import org.divarena.network.instances.Instance;
-import org.divarena.network.instances.WorldInstance;
+import org.divarena.game.instances.Instance;
+import org.divarena.game.instances.WorldInstance;
 
 import java.io.File;
 import java.util.*;

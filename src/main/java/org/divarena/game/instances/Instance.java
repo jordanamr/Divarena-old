@@ -1,6 +1,6 @@
-package org.divarena.network.instances;
+package org.divarena.game.instances;
 
-import org.divarena.network.Coach;
+import org.divarena.game.Coach;
 import org.divarena.protocol.server.world.ActorDespawnMessage;
 import org.divarena.protocol.server.world.ActorSpawnMessage;
 import org.divarena.protocol.server.chat.VicinityContentMessage;

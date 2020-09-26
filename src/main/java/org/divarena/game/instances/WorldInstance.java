@@ -1,4 +1,4 @@
-package org.divarena.network.instances;
+package org.divarena.game.instances;
 
 import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
 import org.divarena.protocol.server.world.ActorMovementMessage;

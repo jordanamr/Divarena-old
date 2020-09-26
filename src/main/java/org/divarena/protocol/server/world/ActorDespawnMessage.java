@@ -2,7 +2,7 @@ package org.divarena.protocol.server.world;
 
 import com.github.simplenet.packet.Packet;
 import lombok.Data;
-import org.divarena.network.Coach;
+import org.divarena.game.Coach;
 import org.divarena.protocol.Message;
 
 import java.util.Arrays;

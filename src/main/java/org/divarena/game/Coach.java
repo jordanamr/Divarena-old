@@ -1,9 +1,12 @@
-package org.divarena.network;
+package org.divarena.game;
 
 import com.github.simplenet.packet.Packet;
 import lombok.Data;
 import org.divarena.database.DivarenaDatabase;
 import org.divarena.database.generated.tables.pojos.Coaches;
+import org.divarena.network.ArenaClient;
+
+import java.io.ByteArrayOutputStream;
 
 import static org.divarena.database.generated.tables.Coaches.COACHES;
 
@@ -72,16 +75,23 @@ public @Data class Coach {
             packet.putShort(0); //TODO
         }
 
-        //unserializeCardInventory
+        //unserializeCardInventory (StackInventory#unserialize -> AbstractCoachCard#unserialize)
         // ????
         // short > taille du prochain buffer qui contient l'équipement
         // ---BUFFER---  CoachCard
         // int -> cardId
         // long -> unique ID?
-        // byte -> flags?
+        // byte -> flags? (locked, cursed?)
         // short -> quantity?
         if ((options & 4) == 4) {
-            packet.putShort(0); //TODO
+            packet.putShort(15); //TODO
+
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+
+            packet.putInt(106);
+            packet.putLong(1);
+            packet.putByte(0);
+            packet.putShort(1);
         }
 
         //unserializeLaddersStrength
