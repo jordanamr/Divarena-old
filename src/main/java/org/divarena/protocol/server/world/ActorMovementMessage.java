@@ -1,9 +1,9 @@
-package org.divarena.protocol.server.coach;
+package org.divarena.protocol.server.world;
 
 import com.github.simplenet.packet.Packet;
 import lombok.Data;
 import org.divarena.protocol.Message;
-import org.divarena.protocol.client.coach.CoachActorMovementRequestMessage;
+import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
 
 import java.util.Map;
 

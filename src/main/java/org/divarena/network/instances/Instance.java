@@ -1,8 +1,9 @@
 package org.divarena.network.instances;
 
 import org.divarena.network.Coach;
-import org.divarena.protocol.server.coach.ActorDespawnMessage;
-import org.divarena.protocol.server.coach.ActorSpawnMessage;
+import org.divarena.protocol.server.world.ActorDespawnMessage;
+import org.divarena.protocol.server.world.ActorSpawnMessage;
+import org.divarena.protocol.server.chat.VicinityContentMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,5 +32,16 @@ public abstract class Instance {
 
     public boolean containsMember(Coach coach) {
         return members.contains(coach);
+    }
+
+    public void broadcastMessage(Coach coach, String message) {
+        VicinityContentMessage msg = new VicinityContentMessage();
+        msg.setMemberTalking(coach.getName());
+        msg.setMemberID(coach.getId());
+        msg.setMessageContent(message);
+        members.forEach(coaches -> {
+            if (coaches.getId() == msg.getMemberID()) return;
+            coaches.getClient().sendMessage(msg);
+        });
     }
 }

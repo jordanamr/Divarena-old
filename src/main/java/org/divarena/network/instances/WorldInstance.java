@@ -1,7 +1,7 @@
 package org.divarena.network.instances;
 
-import org.divarena.protocol.client.coach.CoachActorMovementRequestMessage;
-import org.divarena.protocol.server.coach.ActorMovementMessage;
+import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
+import org.divarena.protocol.server.world.ActorMovementMessage;
 
 import java.util.TreeMap;
 

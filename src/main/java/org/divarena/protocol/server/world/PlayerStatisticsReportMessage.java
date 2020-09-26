@@ -1,4 +1,4 @@
-package org.divarena.protocol.server.coach;
+package org.divarena.protocol.server.world;
 
 import com.github.simplenet.packet.Packet;
 import lombok.Data;

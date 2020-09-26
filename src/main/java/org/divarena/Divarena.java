@@ -79,5 +79,7 @@ public class Divarena {
         clients.remove(client);
     }
 
-
+    public Optional<ArenaClient> getClientByCoachName(String coachName) {
+        return clients.stream().filter(coach -> coach.getCoachName().equalsIgnoreCase(coachName)).findAny();
+    }
 }

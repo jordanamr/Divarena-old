@@ -12,7 +12,7 @@ import org.divarena.network.instances.Instance;
 import org.divarena.network.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.MessageDecoder;
-import org.divarena.protocol.server.coach.EnterInstanceMessage;
+import org.divarena.protocol.server.world.EnterInstanceMessage;
 import org.divarena.protocol.server.initial.CoachInformationsMessage;
 
 import java.nio.ByteBuffer;
@@ -102,22 +102,25 @@ public class ArenaClient {
             prepend.putShort(message.getId());
         });
         packet.queueAndFlush(netClient);
-        if (thenClose) {
-            try {
-                Thread.sleep(200); // https://github.com/jhg023/SimpleNet/issues/21
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            netClient.close();
-        }
+        if (thenClose) disconnect();
+    }
+
+    public String getCoachName() {
+        if (coach == null) return null;
+        return coach.getName();
     }
 
     public void disconnect() {
+        try {
+            Thread.sleep(200); // https://github.com/jhg023/SimpleNet/issues/21
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         netClient.close();
     }
 
     public void log(String message) {
-        log.info("[" + clientIp + "] " + message);
+        log.info("[" + clientIp + (coach == null ? "" : " - " + coach.getName()) + "] " + message);
     }
 
     public void registerFrame(Frame frame) {

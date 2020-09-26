@@ -5,7 +5,7 @@ import org.divarena.network.ArenaClient;
 import org.divarena.network.Frame;
 import org.divarena.network.instances.WorldInstance;
 import org.divarena.protocol.Message;
-import org.divarena.protocol.client.coach.CoachActorMovementRequestMessage;
+import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
 
 import java.util.Map;
 import java.util.TreeMap;

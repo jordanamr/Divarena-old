@@ -10,7 +10,7 @@ import org.divarena.network.Frame;
 import org.divarena.network.instances.Instance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.initial.CoachCreationMessage;
-import org.divarena.protocol.server.coach.PlayerStatisticsReportMessage;
+import org.divarena.protocol.server.world.PlayerStatisticsReportMessage;
 import org.divarena.protocol.server.initial.CoachCreationResultMessage;
 import org.divarena.protocol.server.initial.QueueNotificationMessage;
 import org.divarena.util.StringUtils;
@@ -81,6 +81,7 @@ public class CoachCreationFrame extends Frame {
 
                 Instance instance = Divarena.getInstance().getWorldInstance(coachPojo.getInstance()); //TODO
                 client.enterInstance(instance);
+                client.registerFrame(new ChatFrame(client));
                 return true;
             }
         }

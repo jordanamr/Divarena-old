@@ -11,3 +11,5 @@ Une frame pour des messages basique (concernant le proxy) est disponible dans ``
 Le reste des frames est disponible dans ``com.ankamagames.dofusarena.client.network.protocol.frame``
 
 Par exemple, lors de l'appui du bouton connexion, ``com.ankamagames.dofusarena.client.network.event.DofusArenaNetworkEventsHandler`` push la ``NetAuthenticationFrame`` puis envoie les informations de connexion.
+
+Les pipes (équivalent des canaux dofus 2) du chat sont enregistrées dans ``ChatInitializer``

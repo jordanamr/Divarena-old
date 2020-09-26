@@ -1,4 +1,4 @@
-package org.divarena.protocol.client.coach;
+package org.divarena.protocol.client.world;
 
 import lombok.Getter;
 import org.divarena.protocol.Message;
