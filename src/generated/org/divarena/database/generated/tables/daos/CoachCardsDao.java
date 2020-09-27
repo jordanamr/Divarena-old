@@ -101,16 +101,16 @@ public class CoachCardsDao extends DAOImpl<CoachCardsRecord, org.divarena.databa
     }
 
     /**
-     * Fetch records that have <code>set_id BETWEEN lowerInclusive AND upperInclusive</code>
+     * Fetch records that have <code>set BETWEEN lowerInclusive AND upperInclusive</code>
      */
-    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchRangeOfSetId(Integer lowerInclusive, Integer upperInclusive) {
-        return fetchRange(CoachCards.COACH_CARDS.SET_ID, lowerInclusive, upperInclusive);
+    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchRangeOfSet(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(CoachCards.COACH_CARDS.SET, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>set_id IN (values)</code>
+     * Fetch records that have <code>set IN (values)</code>
      */
-    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchBySetId(Integer... values) {
-        return fetch(CoachCards.COACH_CARDS.SET_ID, values);
+    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchBySet(Integer... values) {
+        return fetch(CoachCards.COACH_CARDS.SET, values);
     }
 }

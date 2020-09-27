@@ -15,7 +15,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row10;
+import org.jooq.Row11;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -31,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Coaches extends TableImpl<CoachesRecord> {
 
-    private static final long serialVersionUID = 1961106319;
+    private static final long serialVersionUID = 242141383;
 
     /**
      * The reference instance of <code>divarena_db.coaches</code>
@@ -95,6 +95,11 @@ public class Coaches extends TableImpl<CoachesRecord> {
      * The column <code>divarena_db.coaches.z</code>.
      */
     public final TableField<CoachesRecord, Integer> Z = createField(DSL.name("z"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>divarena_db.coaches.inventory</code>.
+     */
+    public final TableField<CoachesRecord, byte[]> INVENTORY = createField(DSL.name("inventory"), org.jooq.impl.SQLDataType.BLOB.nullable(false).defaultValue(org.jooq.impl.DSL.field("''", org.jooq.impl.SQLDataType.BLOB)), this, "");
 
     /**
      * Create a <code>divarena_db.coaches</code> table reference
@@ -176,11 +181,11 @@ public class Coaches extends TableImpl<CoachesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row10 type methods
+    // Row11 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row10<Integer, Integer, String, Byte, Byte, Byte, Integer, Integer, Integer, Integer> fieldsRow() {
-        return (Row10) super.fieldsRow();
+    public Row11<Integer, Integer, String, Byte, Byte, Byte, Integer, Integer, Integer, Integer, byte[]> fieldsRow() {
+        return (Row11) super.fieldsRow();
     }
 }

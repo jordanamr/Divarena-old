@@ -13,7 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Coaches implements Serializable {
 
-    private static final long serialVersionUID = -1968500961;
+    private static final long serialVersionUID = -1333929716;
 
     private Integer id;
     private Integer accountId;
@@ -25,6 +25,7 @@ public class Coaches implements Serializable {
     private Integer x;
     private Integer y;
     private Integer z;
+    private byte[]  inventory;
 
     public Coaches() {}
 
@@ -39,6 +40,7 @@ public class Coaches implements Serializable {
         this.x = value.x;
         this.y = value.y;
         this.z = value.z;
+        this.inventory = value.inventory;
     }
 
     public Coaches(
@@ -51,7 +53,8 @@ public class Coaches implements Serializable {
         Integer instance,
         Integer x,
         Integer y,
-        Integer z
+        Integer z,
+        byte[]  inventory
     ) {
         this.id = id;
         this.accountId = accountId;
@@ -63,6 +66,7 @@ public class Coaches implements Serializable {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.inventory = inventory;
     }
 
     public Integer getId() {
@@ -145,6 +149,14 @@ public class Coaches implements Serializable {
         this.z = z;
     }
 
+    public byte[] getInventory() {
+        return this.inventory;
+    }
+
+    public void setInventory(byte[] inventory) {
+        this.inventory = inventory;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Coaches (");
@@ -159,6 +171,7 @@ public class Coaches implements Serializable {
         sb.append(", ").append(x);
         sb.append(", ").append(y);
         sb.append(", ").append(z);
+        sb.append(", ").append("[binary...]");
 
         sb.append(")");
         return sb.toString();

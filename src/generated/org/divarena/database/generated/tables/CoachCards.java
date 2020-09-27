@@ -31,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoachCards extends TableImpl<CoachCardsRecord> {
 
-    private static final long serialVersionUID = -545626381;
+    private static final long serialVersionUID = 1462172067;
 
     /**
      * The reference instance of <code>divarena_db.coach_cards</code>
@@ -67,9 +67,9 @@ public class CoachCards extends TableImpl<CoachCardsRecord> {
     public final TableField<CoachCardsRecord, Integer> VALUE = createField(DSL.name("value"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>divarena_db.coach_cards.set_id</code>.
+     * The column <code>divarena_db.coach_cards.set</code>.
      */
-    public final TableField<CoachCardsRecord, Integer> SET_ID = createField(DSL.name("set_id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CoachCardsRecord, Integer> SET = createField(DSL.name("set"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>divarena_db.coach_cards</code> table reference

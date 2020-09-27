@@ -7,6 +7,7 @@ package org.divarena.database.generated;
 import org.divarena.database.generated.tables.Accounts;
 import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
+import org.divarena.database.generated.tables.Counts;
 import org.divarena.database.generated.tables.FighterCards;
 
 
@@ -30,6 +31,11 @@ public class Tables {
      * The table <code>divarena_db.coaches</code>.
      */
     public static final Coaches COACHES = Coaches.COACHES;
+
+    /**
+     * The table <code>divarena_db.counts</code>.
+     */
+    public static final Counts COUNTS = Counts.COUNTS;
 
     /**
      * The table <code>divarena_db.fighter_cards</code>.

@@ -13,13 +13,13 @@ import java.io.Serializable;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoachCards implements Serializable {
 
-    private static final long serialVersionUID = 1037084564;
+    private static final long serialVersionUID = -438437201;
 
     private Integer id;
     private String  name;
     private Integer type;
     private Integer value;
-    private Integer setId;
+    private Integer set;
 
     public CoachCards() {}
 
@@ -28,7 +28,7 @@ public class CoachCards implements Serializable {
         this.name = value.name;
         this.type = value.type;
         this.value = value.value;
-        this.setId = value.setId;
+        this.set = value.set;
     }
 
     public CoachCards(
@@ -36,13 +36,13 @@ public class CoachCards implements Serializable {
         String  name,
         Integer type,
         Integer value,
-        Integer setId
+        Integer set
     ) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.value = value;
-        this.setId = setId;
+        this.set = set;
     }
 
     public Integer getId() {
@@ -77,12 +77,12 @@ public class CoachCards implements Serializable {
         this.value = value;
     }
 
-    public Integer getSetId() {
-        return this.setId;
+    public Integer getSet() {
+        return this.set;
     }
 
-    public void setSetId(Integer setId) {
-        this.setId = setId;
+    public void setSet(Integer set) {
+        this.set = set;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class CoachCards implements Serializable {
         sb.append(", ").append(name);
         sb.append(", ").append(type);
         sb.append(", ").append(value);
-        sb.append(", ").append(setId);
+        sb.append(", ").append(set);
 
         sb.append(")");
         return sb.toString();

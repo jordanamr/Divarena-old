@@ -3,6 +3,7 @@ package org.divarena.database;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.divarena.database.generated.tables.daos.AccountsDao;
+import org.divarena.database.generated.tables.daos.CoachCardsDao;
 import org.divarena.database.generated.tables.daos.CoachesDao;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -31,6 +32,8 @@ public class DivarenaDatabase {
     private AccountsDao accountsDao;
     @Getter
     private CoachesDao coachesDao;
+    @Getter
+    private CoachCardsDao coachCardsDao;
 
     public DivarenaDatabase(String server, String username, String password, String database, int poolSize) {
         this.url = String.format("jdbc:mariadb://%s/%s?user=%s&password=%s&maxPoolSize=%s", server, database, username, password, poolSize);
@@ -42,6 +45,7 @@ public class DivarenaDatabase {
         this.dsl = DSL.using(pool, SQLDialect.MARIADB);
         this.accountsDao = new AccountsDao(dsl.configuration());
         this.coachesDao = new CoachesDao(dsl.configuration());
+        this.coachCardsDao = new CoachCardsDao(dsl.configuration());
         log.info("Successfully connected to game database.");
     }
 

@@ -18,7 +18,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> implements Record5<Integer, String, Integer, Integer, Integer> {
 
-    private static final long serialVersionUID = -9045704;
+    private static final long serialVersionUID = 1509381511;
 
     /**
      * Setter for <code>divarena_db.coach_cards.id</code>.
@@ -77,16 +77,16 @@ public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> impl
     }
 
     /**
-     * Setter for <code>divarena_db.coach_cards.set_id</code>.
+     * Setter for <code>divarena_db.coach_cards.set</code>.
      */
-    public void setSetId(Integer value) {
+    public void setSet(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>divarena_db.coach_cards.set_id</code>.
+     * Getter for <code>divarena_db.coach_cards.set</code>.
      */
-    public Integer getSetId() {
+    public Integer getSet() {
         return (Integer) get(4);
     }
 
@@ -135,7 +135,7 @@ public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> impl
 
     @Override
     public Field<Integer> field5() {
-        return CoachCards.COACH_CARDS.SET_ID;
+        return CoachCards.COACH_CARDS.SET;
     }
 
     @Override
@@ -160,7 +160,7 @@ public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> impl
 
     @Override
     public Integer component5() {
-        return getSetId();
+        return getSet();
     }
 
     @Override
@@ -185,7 +185,7 @@ public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> impl
 
     @Override
     public Integer value5() {
-        return getSetId();
+        return getSet();
     }
 
     @Override
@@ -214,7 +214,7 @@ public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> impl
 
     @Override
     public CoachCardsRecord value5(Integer value) {
-        setSetId(value);
+        setSet(value);
         return this;
     }
 
@@ -242,13 +242,13 @@ public class CoachCardsRecord extends UpdatableRecordImpl<CoachCardsRecord> impl
     /**
      * Create a detached, initialised CoachCardsRecord
      */
-    public CoachCardsRecord(Integer id, String name, Integer type, Integer value, Integer setId) {
+    public CoachCardsRecord(Integer id, String name, Integer type, Integer value, Integer set) {
         super(CoachCards.COACH_CARDS);
 
         set(0, id);
         set(1, name);
         set(2, type);
         set(3, value);
-        set(4, setId);
+        set(4, set);
     }
 }

@@ -47,7 +47,7 @@ public class CardsImporter {
                     .set(COACH_CARDS.NAME, cardName)
                     .set(COACH_CARDS.TYPE, cardType)
                     .set(COACH_CARDS.VALUE, cardValue)
-                    .set(COACH_CARDS.SET_ID, cardSet)
+                    .set(COACH_CARDS.SET, cardSet)
                     .execute();
         }
         System.out.println("");

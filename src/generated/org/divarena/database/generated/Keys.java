@@ -7,10 +7,12 @@ package org.divarena.database.generated;
 import org.divarena.database.generated.tables.Accounts;
 import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
+import org.divarena.database.generated.tables.Counts;
 import org.divarena.database.generated.tables.FighterCards;
 import org.divarena.database.generated.tables.records.AccountsRecord;
 import org.divarena.database.generated.tables.records.CoachCardsRecord;
 import org.divarena.database.generated.tables.records.CoachesRecord;
+import org.divarena.database.generated.tables.records.CountsRecord;
 import org.divarena.database.generated.tables.records.FighterCardsRecord;
 import org.jooq.Identity;
 import org.jooq.TableField;
@@ -43,6 +45,8 @@ public class Keys {
     public static final UniqueKey<CoachCardsRecord> KEY_COACH_CARDS_PRIMARY = UniqueKeys0.KEY_COACH_CARDS_PRIMARY;
     public static final UniqueKey<CoachesRecord> KEY_COACHES_PRIMARY = UniqueKeys0.KEY_COACHES_PRIMARY;
     public static final UniqueKey<CoachesRecord> KEY_COACHES_NAME = UniqueKeys0.KEY_COACHES_NAME;
+    public static final UniqueKey<CountsRecord> KEY_COUNTS_PRIMARY = UniqueKeys0.KEY_COUNTS_PRIMARY;
+    public static final UniqueKey<CountsRecord> KEY_COUNTS_NAME = UniqueKeys0.KEY_COUNTS_NAME;
     public static final UniqueKey<FighterCardsRecord> KEY_FIGHTER_CARDS_PRIMARY = UniqueKeys0.KEY_FIGHTER_CARDS_PRIMARY;
 
     // -------------------------------------------------------------------------
@@ -67,6 +71,8 @@ public class Keys {
         public static final UniqueKey<CoachCardsRecord> KEY_COACH_CARDS_PRIMARY = Internal.createUniqueKey(CoachCards.COACH_CARDS, "KEY_coach_cards_PRIMARY", new TableField[] { CoachCards.COACH_CARDS.ID }, true);
         public static final UniqueKey<CoachesRecord> KEY_COACHES_PRIMARY = Internal.createUniqueKey(Coaches.COACHES, "KEY_coaches_PRIMARY", new TableField[] { Coaches.COACHES.ID, Coaches.COACHES.ACCOUNT_ID }, true);
         public static final UniqueKey<CoachesRecord> KEY_COACHES_NAME = Internal.createUniqueKey(Coaches.COACHES, "KEY_coaches_name", new TableField[] { Coaches.COACHES.NAME }, true);
+        public static final UniqueKey<CountsRecord> KEY_COUNTS_PRIMARY = Internal.createUniqueKey(Counts.COUNTS, "KEY_counts_PRIMARY", new TableField[] { Counts.COUNTS.ID }, true);
+        public static final UniqueKey<CountsRecord> KEY_COUNTS_NAME = Internal.createUniqueKey(Counts.COUNTS, "KEY_counts_name", new TableField[] { Counts.COUNTS.NAME }, true);
         public static final UniqueKey<FighterCardsRecord> KEY_FIGHTER_CARDS_PRIMARY = Internal.createUniqueKey(FighterCards.FIGHTER_CARDS, "KEY_fighter_cards_PRIMARY", new TableField[] { FighterCards.FIGHTER_CARDS.ID }, true);
     }
 }

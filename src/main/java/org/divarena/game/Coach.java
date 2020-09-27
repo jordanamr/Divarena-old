@@ -2,6 +2,8 @@ package org.divarena.game;
 
 import com.github.simplenet.packet.Packet;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.divarena.database.DivarenaDatabase;
 import org.divarena.database.generated.tables.pojos.Coaches;
 import org.divarena.network.ArenaClient;
@@ -10,17 +12,25 @@ import java.io.ByteArrayOutputStream;
 
 import static org.divarena.database.generated.tables.Coaches.COACHES;
 
-public @Data class Coach {
+public class Coach {
 
-    private ArenaClient client;
-    private int id;
-    private String name;
-    private byte skinColor;
-    private byte hairColor;
-    private byte sex;
+    @Getter
+    private final ArenaClient client;
+    @Getter
+    private final int id;
+    @Getter
+    private final String name;
+    private final byte skinColor;
+    private final byte hairColor;
+    private final byte sex;
+    @Getter @Setter
     private int x;
+    @Getter @Setter
     private int y;
+    @Getter @Setter
     private int z;
+    @Getter
+    private final CoachInventory inventory;
 
     public Coach(ArenaClient client, Coaches coachPojo) {
         this.client = client;
@@ -32,6 +42,7 @@ public @Data class Coach {
         this.x = coachPojo.getX();
         this.y = coachPojo.getY();
         this.z = coachPojo.getZ();
+        this.inventory = new CoachInventory(coachPojo.getInventory());
     }
 
     public void save() {
@@ -40,6 +51,7 @@ public @Data class Coach {
                 .set(COACHES.X, x)
                 .set(COACHES.Y, y)
                 .set(COACHES.Z, z)
+                .set(COACHES.INVENTORY, inventory.serialize())
                 .where(COACHES.ID.eq(id))
                 .execute();
     }
@@ -84,14 +96,9 @@ public @Data class Coach {
         // byte -> flags? (locked, cursed?)
         // short -> quantity?
         if ((options & 4) == 4) {
-            packet.putShort(15); //TODO
-
-            ByteArrayOutputStream buf = new ByteArrayOutputStream();
-
-            packet.putInt(106);
-            packet.putLong(1);
-            packet.putByte(0);
-            packet.putShort(1);
+            byte[] inv = inventory.serialize();
+            packet.putShort(inv.length);
+            packet.putBytes(inv);
         }
 
         //unserializeLaddersStrength
