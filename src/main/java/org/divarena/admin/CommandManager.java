@@ -19,6 +19,7 @@ public class CommandManager {
         this.commands = Collections.synchronizedMap(new HashMap<>());
         commands.put("help", new HelpCommand());
         commands.put("save", new SaveCommand());
+        commands.put("tp", new TpCommand());
     }
 
     public Command getCommand(String alias) {

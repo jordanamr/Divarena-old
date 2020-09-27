@@ -25,9 +25,11 @@ public abstract class Instance {
     }
 
     public void removeMember(Coach coach) {
-        members.remove(coach);
-        members.forEach(coaches -> coaches.getClient().sendMessage(new ActorDespawnMessage(coach)));
-        //TODO Despawn
+        if (members.contains(coach)) {
+            members.remove(coach);
+            members.forEach(coaches -> coaches.getClient().sendMessage(new ActorDespawnMessage(coach)));
+            //TODO Despawn
+        }
     }
 
     public boolean containsMember(Coach coach) {
