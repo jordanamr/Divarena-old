@@ -5,6 +5,7 @@ import org.divarena.network.ArenaClient;
 import org.divarena.protocol.client.initial.*;
 import org.divarena.protocol.client.world.*;
 import org.divarena.protocol.client.chat.*;
+import org.divarena.protocol.client.admin.*;
 
 import java.util.Arrays;
 
@@ -50,6 +51,10 @@ public class MessageDecoder {
             }
             case 3155: {
                 msg = new UserPrivateContentMessage();
+                break;
+            }
+            case 8193: {
+                msg = new ConsoleAdminCommandMessage();
                 break;
             }
         }
