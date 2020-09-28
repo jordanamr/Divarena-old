@@ -125,13 +125,11 @@ public class Coach {
         // long -> unique ID?
         // byte -> flags?
         if ((options & 2) == 2) {
-            packet.putShort(equipment.size() * 15);
-            equipment.forEach((position, card) -> {
-                packet.putShort(position);
-                packet.putInt(card.getId());
-                packet.putLong(card.getUid());
-                packet.putByte(card.getFlags());
-            });
+            byte[] equipData = serializeEquipment();
+            packet.putShort(equipData.length);
+            if (equipData.length != 0) {
+                packet.putBytes(equipData);
+            }
         }
 
         //unserializeCardInventory (StackInventory#unserialize -> AbstractCoachCard#unserialize)

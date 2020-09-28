@@ -1,5 +1,6 @@
 package org.divarena.game;
 
+import lombok.Getter;
 import org.divarena.Divarena;
 import org.divarena.game.cards.CoachCard;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public class CoachInventory {
 
+    @Getter
     private final Map<CoachCard, Short> contents;
 
     public CoachInventory(byte[] inventory) {

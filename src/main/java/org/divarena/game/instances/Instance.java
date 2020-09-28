@@ -1,5 +1,6 @@
 package org.divarena.game.instances;
 
+import lombok.Getter;
 import org.divarena.game.Coach;
 import org.divarena.protocol.server.world.ActorDespawnMessage;
 import org.divarena.protocol.server.world.ActorSpawnMessage;
@@ -12,6 +13,7 @@ import java.util.List;
 public abstract class Instance {
 
     protected int id;
+    @Getter
     protected final List<Coach> members;
 
     protected Instance() {

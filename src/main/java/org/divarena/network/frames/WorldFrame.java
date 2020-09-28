@@ -9,6 +9,7 @@ import org.divarena.game.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.coach.CoachEquipmentUpdateRequestMessage;
 import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
+import org.divarena.protocol.server.coach.CoachEquipmentUpdateMessage;
 import org.divarena.protocol.server.coach.CoachInventoryUpdateMessage;
 
 import java.util.Arrays;
@@ -91,7 +92,11 @@ public class WorldFrame extends Frame {
                     updateMsg.getEquipmentAddedItems().put((short) i, removedFromInv);
                 }
                 client.sendMessage(updateMsg);
-                //TODO Broadcast equipment update to other actors
+                CoachEquipmentUpdateMessage broadcastMsg = new CoachEquipmentUpdateMessage(client.getCoach());
+                client.getInstance().getMembers().forEach(coaches -> {
+                    if (coaches.getId() == client.getCoach().getId()) return;
+                    coaches.getClient().sendMessage(broadcastMsg);
+                });
                 return true;
             }
         }
