@@ -161,7 +161,7 @@ public class CardsImporter {
         TROUSERS(9, "Pantalon", new short[]{6}),
         SHIRT(10, "Chemise", new short[]{11}),
         HAT(11, "Chapeau", new short[1]),
-        STAFF(12, "Bâton", new short[]{7}),
+        SASHIMONO(12, "Bâton", new short[]{7}),
         PET(13, "Familier", new short[]{9}),
         CURSE(14, "Malediction", new short[]{-1}),
         PET_HEART(15, "Familier - Coeur", new short[]{-1}),
