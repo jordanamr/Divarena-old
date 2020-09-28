@@ -58,6 +58,7 @@ public class CoachCreationFrame extends Frame {
                     client.sendMessage(response, true);
                     return true;
                 }
+                client.unregisterFrame(CoachCreationFrame.class);
 
                 Config config = Divarena.getInstance().getConfig();
                 Coaches coachPojo = new Coaches();
