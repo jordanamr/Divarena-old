@@ -7,7 +7,11 @@ import org.divarena.protocol.server.admin.ConsoleAdminCommandResultMessage;
 public abstract class Command {
 
     @Getter
-    protected String command;
+    private final String command;
+
+    protected Command(String command) {
+        this.command = command;
+    }
 
     public void execute(ArenaClient client, String[] args) {
         throw new UnsupportedOperationException();

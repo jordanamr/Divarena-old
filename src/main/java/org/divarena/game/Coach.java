@@ -4,11 +4,17 @@ import com.github.simplenet.packet.Packet;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.divarena.Divarena;
 import org.divarena.database.DivarenaDatabase;
 import org.divarena.database.generated.tables.pojos.Coaches;
+import org.divarena.game.cards.CoachCard;
 import org.divarena.network.ArenaClient;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.divarena.database.generated.tables.Coaches.COACHES;
 
@@ -31,6 +37,8 @@ public class Coach {
     private int z;
     @Getter
     private final CoachInventory inventory;
+    @Getter
+    private final Map<Short, CoachCard> equipment;
 
     public Coach(ArenaClient client, Coaches coachPojo) {
         this.client = client;
@@ -43,6 +51,7 @@ public class Coach {
         this.y = coachPojo.getY();
         this.z = coachPojo.getZ();
         this.inventory = new CoachInventory(coachPojo.getInventory());
+        this.equipment = deserializeEquipment(coachPojo.getEquipment());
     }
 
     public void save() {
@@ -52,8 +61,40 @@ public class Coach {
                 .set(COACHES.Y, y)
                 .set(COACHES.Z, z)
                 .set(COACHES.INVENTORY, inventory.serialize())
+                .set(COACHES.EQUIPMENT, serializeEquipment())
                 .where(COACHES.ID.eq(id))
                 .execute();
+    }
+
+    public Map<Short, CoachCard> deserializeEquipment(byte[] data) {
+        Map<Short, CoachCard> map = Collections.synchronizedMap(new HashMap<>());
+
+        ByteBuffer buf = ByteBuffer.wrap(data);
+        while (buf.hasRemaining()) {
+            short position = buf.getShort();
+            int cardId = buf.getInt();
+            long uniqueId = buf.getLong();
+            byte flags = buf.get();
+            CoachCard card = Divarena.getInstance().getNewCoachCard(cardId);
+            card.setUid(uniqueId);
+            card.setFlags(flags);
+            map.put(position, card);
+        }
+
+        return map;
+    }
+
+    public byte[] serializeEquipment() {
+        ByteBuffer buf = ByteBuffer.allocate(equipment.size() * 15);
+
+        equipment.forEach((position, card) -> {
+            buf.putShort(position);
+            buf.putInt(card.getId());
+            buf.putLong(card.getUid());
+            buf.put(card.getFlags());
+        });
+
+        return buf.array();
     }
 
     public void serialize(Packet packet, int options) {
@@ -84,7 +125,13 @@ public class Coach {
         // long -> unique ID?
         // byte -> flags?
         if ((options & 2) == 2) {
-            packet.putShort(0); //TODO
+            packet.putShort(equipment.size() * 15);
+            equipment.forEach((position, card) -> {
+                packet.putShort(position);
+                packet.putInt(card.getId());
+                packet.putLong(card.getUid());
+                packet.putByte(card.getFlags());
+            });
         }
 
         //unserializeCardInventory (StackInventory#unserialize -> AbstractCoachCard#unserialize)

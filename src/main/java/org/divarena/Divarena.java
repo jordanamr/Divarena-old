@@ -41,6 +41,7 @@ public class Divarena {
     @Getter
     private final List<ArenaClient> clients;
     private final Map<Integer, WorldInstance> worldInstances;
+    @Getter
     private final Map<Integer, CoachCard> coachCards;
     private final AtomicInteger coachCardUID;
 
@@ -102,7 +103,8 @@ public class Divarena {
     }
 
     public CoachCard getNewCoachCard(int id) {
-        return coachCards.get(id).clone();
+        CoachCard card = coachCards.get(id);
+        return card == null ? null : card.clone();
     }
 
     public int getNextCoachCardUID() {
@@ -110,8 +112,8 @@ public class Divarena {
     }
 
     public void save() {
-        clients.forEach(client -> client.getCoach().save());
+        clients.forEach(ArenaClient::save);
         database.getDsl().update(Counts.COUNTS).set(Counts.COUNTS.COUNT, coachCardUID.get()).where(Counts.COUNTS.NAME.eq("COACH_CARD_UID")).execute();
-        //TODO Block trades during save
+        //TODO Block trades & logins during save
     }
 }

@@ -5,8 +5,8 @@ import org.divarena.network.ArenaClient;
 
 public class SaveCommand extends Command {
 
-    public SaveCommand() {
-        this.command = "save";
+    public SaveCommand(String alias) {
+        super(alias);
     }
 
     @Override

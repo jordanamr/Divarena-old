@@ -15,7 +15,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row11;
+import org.jooq.Row12;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -31,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Coaches extends TableImpl<CoachesRecord> {
 
-    private static final long serialVersionUID = 242141383;
+    private static final long serialVersionUID = -1261341363;
 
     /**
      * The reference instance of <code>divarena_db.coaches</code>
@@ -100,6 +100,11 @@ public class Coaches extends TableImpl<CoachesRecord> {
      * The column <code>divarena_db.coaches.inventory</code>.
      */
     public final TableField<CoachesRecord, byte[]> INVENTORY = createField(DSL.name("inventory"), org.jooq.impl.SQLDataType.BLOB.nullable(false).defaultValue(org.jooq.impl.DSL.field("''", org.jooq.impl.SQLDataType.BLOB)), this, "");
+
+    /**
+     * The column <code>divarena_db.coaches.equipment</code>.
+     */
+    public final TableField<CoachesRecord, byte[]> EQUIPMENT = createField(DSL.name("equipment"), org.jooq.impl.SQLDataType.BLOB.nullable(false).defaultValue(org.jooq.impl.DSL.field("''", org.jooq.impl.SQLDataType.BLOB)), this, "");
 
     /**
      * Create a <code>divarena_db.coaches</code> table reference
@@ -181,11 +186,11 @@ public class Coaches extends TableImpl<CoachesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row11 type methods
+    // Row12 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<Integer, Integer, String, Byte, Byte, Byte, Integer, Integer, Integer, Integer, byte[]> fieldsRow() {
-        return (Row11) super.fieldsRow();
+    public Row12<Integer, Integer, String, Byte, Byte, Byte, Integer, Integer, Integer, Integer, byte[], byte[]> fieldsRow() {
+        return (Row12) super.fieldsRow();
     }
 }

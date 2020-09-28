@@ -6,6 +6,7 @@ import org.divarena.protocol.client.initial.*;
 import org.divarena.protocol.client.world.*;
 import org.divarena.protocol.client.chat.*;
 import org.divarena.protocol.client.admin.*;
+import org.divarena.protocol.client.coach.*;
 
 import java.util.Arrays;
 
@@ -56,6 +57,9 @@ public class MessageDecoder {
             case 8193: {
                 msg = new ConsoleAdminCommandMessage();
                 break;
+            }
+            case 5201: {
+                msg = new CoachEquipmentUpdateRequestMessage();
             }
         }
         if (msg == null) {

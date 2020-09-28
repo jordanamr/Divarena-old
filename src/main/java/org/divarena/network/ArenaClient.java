@@ -106,6 +106,10 @@ public class ArenaClient {
         if (thenClose) disconnect();
     }
 
+    public void save() {
+        if (coach != null) coach.save();
+    }
+
     public String getCoachName() {
         if (coach == null) return null;
         return coach.getName();
