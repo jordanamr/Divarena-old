@@ -12,8 +12,6 @@ import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
 import org.divarena.protocol.server.coach.CoachEquipmentUpdateMessage;
 import org.divarena.protocol.server.coach.CoachInventoryUpdateMessage;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
