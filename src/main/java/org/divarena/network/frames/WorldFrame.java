@@ -91,12 +91,14 @@ public class WorldFrame extends Frame {
                     updateMsg.getInventoryRemovedItems().add(removedFromInv.getUid());
                     updateMsg.getEquipmentAddedItems().put((short) i, removedFromInv);
                 }
-                client.sendMessage(updateMsg);
-                CoachEquipmentUpdateMessage broadcastMsg = new CoachEquipmentUpdateMessage(client.getCoach());
-                client.getInstance().getMembers().forEach(coaches -> {
-                    if (coaches.getId() == client.getCoach().getId()) return;
-                    coaches.getClient().sendMessage(broadcastMsg);
-                });
+                if (updateMsg.hasChanges()) {
+                    client.sendMessage(updateMsg);
+                    CoachEquipmentUpdateMessage broadcastMsg = new CoachEquipmentUpdateMessage(client.getCoach());
+                    client.getInstance().getMembers().forEach(coaches -> {
+                        if (coaches.getId() == client.getCoach().getId()) return;
+                        coaches.getClient().sendMessage(broadcastMsg);
+                    });
+                }
                 return true;
             }
         }

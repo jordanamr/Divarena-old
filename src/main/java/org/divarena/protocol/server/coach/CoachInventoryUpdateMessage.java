@@ -22,6 +22,13 @@ public @Data class CoachInventoryUpdateMessage extends Message {
         this.inventoryRemovedItems = Collections.synchronizedList(new ArrayList<>());
     }
 
+    public boolean hasChanges() {
+        if (equipmentAddedItems.isEmpty() && equipmentRemovedItems.isEmpty() && inventoryAddedItems.isEmpty() && inventoryRemovedItems.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public Packet encode() {
         Packet packet = Packet.builder();
