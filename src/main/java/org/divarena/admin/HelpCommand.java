@@ -18,6 +18,6 @@ public class HelpCommand extends Command {
             builder.append(it.next().getCommand());
             if (it.hasNext()) builder.append(", ");
         }
-        trace(client, builder.toString());
+        log(client, builder.toString());
     }
 }

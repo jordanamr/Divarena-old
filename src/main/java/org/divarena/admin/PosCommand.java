@@ -13,6 +13,6 @@ public class PosCommand extends Command {
         int x = client.getCoach().getX();
         int y = client.getCoach().getY();
         int z = client.getCoach().getZ();
-        trace(client, x + ", " + y + ", " + z);
+        log(client, x + ", " + y + ", " + z);
     }
 }

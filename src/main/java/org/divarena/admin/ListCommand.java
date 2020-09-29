@@ -23,6 +23,6 @@ public class ListCommand extends Command {
             builder.append(")");
             if (it.hasNext()) builder.append(", ");
         }
-        trace(client, builder.toString());
+        log(client, builder.toString());
     }
 }

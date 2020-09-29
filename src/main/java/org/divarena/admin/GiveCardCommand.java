@@ -14,7 +14,7 @@ public class GiveCardCommand extends Command {
     @Override
     public void execute(ArenaClient client, String[] args) {
         if (args.length == 0) {
-            trace(client, "Utilisation: givecard [id]");
+            log(client, "Utilisation: givecard [id]");
             return;
         }
 

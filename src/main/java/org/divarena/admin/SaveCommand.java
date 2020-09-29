@@ -11,7 +11,7 @@ public class SaveCommand extends Command {
 
     @Override
     public void execute(ArenaClient client, String[] args) {
-        trace(client, "Sauvegarde du serveur en cours...");
+        log(client, "Sauvegarde du serveur en cours...");
         long startTime = System.currentTimeMillis();
         Divarena.getInstance().save();
         long endTime = System.currentTimeMillis();
