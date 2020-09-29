@@ -9,6 +9,7 @@ import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
 import org.divarena.database.generated.tables.Counts;
 import org.divarena.database.generated.tables.FighterCards;
+import org.divarena.database.generated.tables.Spells;
 
 
 /**
@@ -41,4 +42,9 @@ public class Tables {
      * The table <code>divarena_db.fighter_cards</code>.
      */
     public static final FighterCards FIGHTER_CARDS = FighterCards.FIGHTER_CARDS;
+
+    /**
+     * The table <code>divarena_db.spells</code>.
+     */
+    public static final Spells SPELLS = Spells.SPELLS;
 }

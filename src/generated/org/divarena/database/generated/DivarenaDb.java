@@ -12,6 +12,7 @@ import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
 import org.divarena.database.generated.tables.Counts;
 import org.divarena.database.generated.tables.FighterCards;
+import org.divarena.database.generated.tables.Spells;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
@@ -23,7 +24,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DivarenaDb extends SchemaImpl {
 
-    private static final long serialVersionUID = 1149388336;
+    private static final long serialVersionUID = -1331451019;
 
     /**
      * The reference instance of <code>divarena_db</code>
@@ -56,6 +57,11 @@ public class DivarenaDb extends SchemaImpl {
     public final FighterCards FIGHTER_CARDS = FighterCards.FIGHTER_CARDS;
 
     /**
+     * The table <code>divarena_db.spells</code>.
+     */
+    public final Spells SPELLS = Spells.SPELLS;
+
+    /**
      * No further instances allowed
      */
     private DivarenaDb() {
@@ -75,6 +81,7 @@ public class DivarenaDb extends SchemaImpl {
             CoachCards.COACH_CARDS,
             Coaches.COACHES,
             Counts.COUNTS,
-            FighterCards.FIGHTER_CARDS);
+            FighterCards.FIGHTER_CARDS,
+            Spells.SPELLS);
     }
 }

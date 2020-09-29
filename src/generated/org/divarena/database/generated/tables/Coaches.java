@@ -15,7 +15,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row12;
+import org.jooq.Row13;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -31,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Coaches extends TableImpl<CoachesRecord> {
 
-    private static final long serialVersionUID = -1261341363;
+    private static final long serialVersionUID = -1190979635;
 
     /**
      * The reference instance of <code>divarena_db.coaches</code>
@@ -105,6 +105,11 @@ public class Coaches extends TableImpl<CoachesRecord> {
      * The column <code>divarena_db.coaches.equipment</code>.
      */
     public final TableField<CoachesRecord, byte[]> EQUIPMENT = createField(DSL.name("equipment"), org.jooq.impl.SQLDataType.BLOB.nullable(false).defaultValue(org.jooq.impl.DSL.field("''", org.jooq.impl.SQLDataType.BLOB)), this, "");
+
+    /**
+     * The column <code>divarena_db.coaches.fighters</code>.
+     */
+    public final TableField<CoachesRecord, byte[]> FIGHTERS = createField(DSL.name("fighters"), org.jooq.impl.SQLDataType.BLOB.nullable(false).defaultValue(org.jooq.impl.DSL.field("''", org.jooq.impl.SQLDataType.BLOB)), this, "");
 
     /**
      * Create a <code>divarena_db.coaches</code> table reference
@@ -186,11 +191,11 @@ public class Coaches extends TableImpl<CoachesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row12 type methods
+    // Row13 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row12<Integer, Integer, String, Byte, Byte, Byte, Integer, Integer, Integer, Integer, byte[], byte[]> fieldsRow() {
-        return (Row12) super.fieldsRow();
+    public Row13<Integer, Integer, String, Byte, Byte, Byte, Integer, Integer, Integer, Integer, byte[], byte[], byte[]> fieldsRow() {
+        return (Row13) super.fieldsRow();
     }
 }

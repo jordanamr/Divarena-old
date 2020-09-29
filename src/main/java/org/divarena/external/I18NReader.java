@@ -23,6 +23,8 @@ public class I18NReader {
     public enum DataType {
         FIGHTER_CARD_NAME("content", 1),
         FIGHTER_CARD_DESCRIPTION("content", 2),
+        SPELL_NAME("content", 3),
+        SPELL_DESCRIPTION("content", 4),
         COACH_CARD_NAME("content", 23),
         COACH_CARD_DESCRIPTION("content", 24);
 

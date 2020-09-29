@@ -212,4 +212,18 @@ public class CoachesDao extends DAOImpl<CoachesRecord, org.divarena.database.gen
     public List<org.divarena.database.generated.tables.pojos.Coaches> fetchByEquipment(byte[]... values) {
         return fetch(Coaches.COACHES.EQUIPMENT, values);
     }
+
+    /**
+     * Fetch records that have <code>fighters BETWEEN lowerInclusive AND upperInclusive</code>
+     */
+    public List<org.divarena.database.generated.tables.pojos.Coaches> fetchRangeOfFighters(byte[] lowerInclusive, byte[] upperInclusive) {
+        return fetchRange(Coaches.COACHES.FIGHTERS, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>fighters IN (values)</code>
+     */
+    public List<org.divarena.database.generated.tables.pojos.Coaches> fetchByFighters(byte[]... values) {
+        return fetch(Coaches.COACHES.FIGHTERS, values);
+    }
 }

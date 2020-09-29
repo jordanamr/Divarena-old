@@ -9,11 +9,13 @@ import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
 import org.divarena.database.generated.tables.Counts;
 import org.divarena.database.generated.tables.FighterCards;
+import org.divarena.database.generated.tables.Spells;
 import org.divarena.database.generated.tables.records.AccountsRecord;
 import org.divarena.database.generated.tables.records.CoachCardsRecord;
 import org.divarena.database.generated.tables.records.CoachesRecord;
 import org.divarena.database.generated.tables.records.CountsRecord;
 import org.divarena.database.generated.tables.records.FighterCardsRecord;
+import org.divarena.database.generated.tables.records.SpellsRecord;
 import org.jooq.Identity;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -48,6 +50,7 @@ public class Keys {
     public static final UniqueKey<CountsRecord> KEY_COUNTS_PRIMARY = UniqueKeys0.KEY_COUNTS_PRIMARY;
     public static final UniqueKey<CountsRecord> KEY_COUNTS_NAME = UniqueKeys0.KEY_COUNTS_NAME;
     public static final UniqueKey<FighterCardsRecord> KEY_FIGHTER_CARDS_PRIMARY = UniqueKeys0.KEY_FIGHTER_CARDS_PRIMARY;
+    public static final UniqueKey<SpellsRecord> KEY_SPELLS_PRIMARY = UniqueKeys0.KEY_SPELLS_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -74,5 +77,6 @@ public class Keys {
         public static final UniqueKey<CountsRecord> KEY_COUNTS_PRIMARY = Internal.createUniqueKey(Counts.COUNTS, "KEY_counts_PRIMARY", new TableField[] { Counts.COUNTS.ID }, true);
         public static final UniqueKey<CountsRecord> KEY_COUNTS_NAME = Internal.createUniqueKey(Counts.COUNTS, "KEY_counts_name", new TableField[] { Counts.COUNTS.NAME }, true);
         public static final UniqueKey<FighterCardsRecord> KEY_FIGHTER_CARDS_PRIMARY = Internal.createUniqueKey(FighterCards.FIGHTER_CARDS, "KEY_fighter_cards_PRIMARY", new TableField[] { FighterCards.FIGHTER_CARDS.ID }, true);
+        public static final UniqueKey<SpellsRecord> KEY_SPELLS_PRIMARY = Internal.createUniqueKey(Spells.SPELLS, "KEY_spells_PRIMARY", new TableField[] { Spells.SPELLS.ID }, true);
     }
 }
