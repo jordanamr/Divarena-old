@@ -43,6 +43,10 @@ public class MessageDecoder {
                 msg = new CoachCreationMessage();
                 break;
             }
+            case 4514: {
+                msg = new ResetPositionRequestMessage();
+                break;
+            }
             case 4501: {
                 msg = new CoachActorMovementRequestMessage();
                 break;

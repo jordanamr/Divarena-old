@@ -9,6 +9,7 @@ import org.divarena.game.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.coach.CoachEquipmentUpdateRequestMessage;
 import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
+import org.divarena.protocol.client.world.ResetPositionRequestMessage;
 import org.divarena.protocol.server.coach.CoachEquipmentUpdateMessage;
 import org.divarena.protocol.server.coach.CoachInventoryUpdateMessage;
 
@@ -40,6 +41,10 @@ public class WorldFrame extends Frame {
                 client.getCoach().setX(lastStep.getX());
                 client.getCoach().setY(lastStep.getY());
                 client.getCoach().setZ(lastStep.getZ());
+                return true;
+            }
+            case 4514: {
+                ResetPositionRequestMessage msg = (ResetPositionRequestMessage) message; //TODO ?????
                 return true;
             }
             case 5201: {
