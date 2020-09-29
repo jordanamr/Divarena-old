@@ -7,6 +7,7 @@ import org.divarena.protocol.client.world.*;
 import org.divarena.protocol.client.chat.*;
 import org.divarena.protocol.client.admin.*;
 import org.divarena.protocol.client.coach.*;
+import org.divarena.protocol.client.team.*;
 
 import java.util.Arrays;
 
@@ -60,6 +61,19 @@ public class MessageDecoder {
             }
             case 5201: {
                 msg = new CoachEquipmentUpdateRequestMessage();
+                break;
+            }
+            case 6005: {
+                msg = new FighterInformationListRequestMessage();
+                break;
+            }
+            case 6031: {
+                msg = new TeamPresetListRequestMessage();
+                break;
+            }
+            case 6001: {
+                msg = new CreateFighterInformationRequestMessage();
+                break;
             }
         }
         if (msg == null) {

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.divarena.Divarena;
 import org.divarena.game.Coach;
 import org.divarena.network.frames.InitialFrame;
+import org.divarena.network.frames.TeamFrame;
 import org.divarena.network.frames.WorldFrame;
 import org.divarena.game.instances.Instance;
 import org.divarena.game.instances.WorldInstance;
@@ -143,10 +144,11 @@ public class ArenaClient {
 
     public void enterInstance(Instance instance) {
         if (instance instanceof WorldInstance) {
-            sendMessage(new EnterInstanceMessage(coach));
             this.instance = instance;
+            sendMessage(new EnterInstanceMessage(coach));
             instance.addMember(coach);
             registerFrame(new WorldFrame(this)); //TODO
+            registerFrame(new TeamFrame(this)); //TODO
         }
     }
 }
