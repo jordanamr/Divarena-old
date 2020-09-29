@@ -36,7 +36,7 @@ public class DivarenaDatabase {
     private CoachCardsDao coachCardsDao;
 
     public DivarenaDatabase(String server, String username, String password, String database, int poolSize) {
-        this.url = String.format("jdbc:mariadb://%s/%s?user=%s&password=%s&maxPoolSize=%s", server, database, username, password, poolSize);
+        this.url = String.format("jdbc:mariadb://%s/%s?useUnicode=yes&characterEncoding=UTF-8&user=%s&password=%s&maxPoolSize=%s", server, database, username, password, poolSize);
         INSTANCE = this;
     }
 
