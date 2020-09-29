@@ -17,7 +17,7 @@ public @Data class CoachInformationsMessage extends Message {
     @Override
     public Packet encode() {
         Packet packet = Packet.builder();
-        coach.serialize(packet, 14);
+        coach.serialize(packet, 30);
         return packet;
     }
 }

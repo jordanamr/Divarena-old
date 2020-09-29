@@ -146,6 +146,15 @@ public class Coach {
             packet.putBytes(inv);
         }
 
+        //unserializeLockedSet - panoplies qui sont cadenassées
+        // ????
+        // short > taille du prochain buffer
+        // ---BUFFER---
+        // int -> setId
+        if ((options & 0x10) == 16) {
+            packet.putShort(0); //TODO
+        }
+
         //unserializeLaddersStrength
         // ????
         // short -> nombres de "laddersStrength" ?
