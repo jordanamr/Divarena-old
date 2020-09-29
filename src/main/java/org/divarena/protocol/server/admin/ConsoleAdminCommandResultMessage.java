@@ -13,7 +13,7 @@ public @Data class ConsoleAdminCommandResultMessage extends Message {
     private String message;
 
     public ConsoleAdminCommandResultMessage() {
-        this.id = 8194;
+        this.id = 102;
     }
 
     @Override
