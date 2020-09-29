@@ -47,12 +47,14 @@ public class ArenaClient {
         netClient.preDisconnect(() -> {
             log("disconnecting...");
             Divarena.getInstance().removeClient(this);
-            if (coach == null) return;
-            log("saving coach...");
-            coach.save();
-            if (instance == null) return;
-            log("leaving instance...");
-            instance.removeMember(coach);
+            if (coach != null) {
+                log("saving coach...");
+                coach.save();
+            }
+            if (instance != null) {
+                log("leaving instance...");
+                instance.removeMember(coach);
+            }
         });
         netClient.postDisconnect(() -> log("disconnected!"));
 
