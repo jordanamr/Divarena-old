@@ -22,6 +22,8 @@ public @Data class CoachInventoryUpdateMessage extends Message {
         this.equipmentRemovedItems = Collections.synchronizedList(new ArrayList<>());
         this.inventoryAddedItems = Collections.synchronizedMap(new HashMap<>());
         this.inventoryRemovedItems = Collections.synchronizedList(new ArrayList<>());
+        this.inventoryUnlockedSets = Collections.synchronizedList(new ArrayList<>());
+        this.inventoryLockedSets = Collections.synchronizedList(new ArrayList<>());
     }
 
     public boolean hasChanges() {
