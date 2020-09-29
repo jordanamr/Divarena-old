@@ -28,16 +28,16 @@ public class WorldFrame extends Frame {
             case 4501: {
                 CoachActorMovementRequestMessage msg = (CoachActorMovementRequestMessage) message;
 
-                // TODO Wesh?
-                TreeMap<Integer, CoachActorMovementRequestMessage.PathStep> newSteps = new TreeMap<>();
+                // TODO Wesh? --- Not needed anymore?
+                /*TreeMap<Integer, CoachActorMovementRequestMessage.PathStep> newSteps = new TreeMap<>();
                 newSteps.put(0, new CoachActorMovementRequestMessage.PathStep(client.getCoach().getX(), client.getCoach().getY(), (short) client.getCoach().getZ()));
                 for (Map.Entry<Integer, CoachActorMovementRequestMessage.PathStep> entry : msg.getSteps().entrySet()) {
                     newSteps.put(entry.getKey() + 1, entry.getValue());
-                }
+                }*/
 
                 WorldInstance instance = (WorldInstance) client.getInstance();
-                instance.broadcastMovement(client.getCoach().getId(), newSteps);
-                CoachActorMovementRequestMessage.PathStep lastStep = newSteps.lastEntry().getValue();
+                instance.broadcastMovement(client.getCoach().getId(), msg.getSteps());
+                CoachActorMovementRequestMessage.PathStep lastStep = msg.getSteps().lastEntry().getValue();
                 client.getCoach().setX(lastStep.getX());
                 client.getCoach().setY(lastStep.getY());
                 client.getCoach().setZ(lastStep.getZ());
