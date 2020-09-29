@@ -9,7 +9,7 @@ public @Data class QueueNotificationMessage extends Message {
     private int position = -1;
 
     public QueueNotificationMessage() {
-        this.id = 8192;
+        this.id = 100;
     }
 
     @Override
