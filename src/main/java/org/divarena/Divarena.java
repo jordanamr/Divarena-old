@@ -99,7 +99,7 @@ public class Divarena {
     }
 
     public Optional<ArenaClient> getClientByCoachName(String coachName) {
-        return clients.stream().filter(coach -> coach.getCoachName().equalsIgnoreCase(coachName)).findAny();
+        return clients.stream().filter(client -> client.getCoachName() != null && client.getCoachName().equalsIgnoreCase(coachName)).findAny();
     }
 
     public CoachCard getNewCoachCard(int id) {
