@@ -27,10 +27,10 @@ public class InitialFrame extends Frame {
         switch (message.getId()) {
             case 7: {
                 ClientVersionMessage msg = (ClientVersionMessage) message;
-                if (msg.getMajor() != 2 || msg.getMinor() != 4) {
+                if (msg.getMajor() != 2 || msg.getMinor() != 13) {
                     InvalidClientVersionMessage response = new InvalidClientVersionMessage();
                     response.setRequiredMajor((byte) 2);
-                    response.setRequiredMinor((short) 4);
+                    response.setRequiredMinor((short) 13);
                     client.sendMessage(response, true);
                 }
                 return true;
