@@ -12,7 +12,7 @@ public class TpPosCommand extends Command {
     @Override
     public void execute(ArenaClient client, String[] args) {
         if (args.length < 3) {
-            log(client, "Utilisation: tppos <x> <y> <z>");
+            log(client, "Utilisation: tppos [x] [y] [z]");
             return;
         }
         try {

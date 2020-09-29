@@ -17,7 +17,7 @@ public class TpHereCommand extends Command {
     @Override
     public void execute(ArenaClient client, String[] args) {
         if (args.length == 0) {
-            log(client, "Utilisation: tphere <coach>");
+            log(client, "Utilisation: tphere [coach]");
             return;
         }
         Optional<ArenaClient> target = Divarena.getInstance().getClientByCoachName(args[0]);

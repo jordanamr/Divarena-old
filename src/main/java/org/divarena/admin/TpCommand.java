@@ -16,7 +16,7 @@ public class TpCommand extends Command {
     @Override
     public void execute(ArenaClient client, String[] args) {
         if (args.length == 0) {
-            log(client, "Utilisation: tp <coach>");
+            log(client, "Utilisation: tp [coach]");
             return;
         }
         Optional<ArenaClient> target = Divarena.getInstance().getClientByCoachName(args[0]);
