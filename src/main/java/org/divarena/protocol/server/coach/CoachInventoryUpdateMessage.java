@@ -13,6 +13,8 @@ public @Data class CoachInventoryUpdateMessage extends Message {
     private List<Short> equipmentRemovedItems;
     private Map<CoachCard, Short> inventoryAddedItems;
     private List<Long> inventoryRemovedItems;
+    private List<Integer> inventoryUnlockedSets;
+    private List<Integer> inventoryLockedSets;
 
     public CoachInventoryUpdateMessage() {
         this.id = 5200;
@@ -23,10 +25,8 @@ public @Data class CoachInventoryUpdateMessage extends Message {
     }
 
     public boolean hasChanges() {
-        if (equipmentAddedItems.isEmpty() && equipmentRemovedItems.isEmpty() && inventoryAddedItems.isEmpty() && inventoryRemovedItems.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !equipmentAddedItems.isEmpty() || !equipmentRemovedItems.isEmpty() || !inventoryAddedItems.isEmpty()
+                || !inventoryRemovedItems.isEmpty() || !inventoryUnlockedSets.isEmpty() || !inventoryLockedSets.isEmpty();
     }
 
     @Override
@@ -50,6 +50,12 @@ public @Data class CoachInventoryUpdateMessage extends Message {
 
         packet.putShort(inventoryRemovedItems.size());
         inventoryRemovedItems.forEach(packet::putLong);
+
+        packet.putShort(inventoryUnlockedSets.size());
+        inventoryUnlockedSets.forEach(packet::putInt);
+
+        packet.putShort(inventoryLockedSets.size());
+        inventoryLockedSets.forEach(packet::putInt);
 
         return packet;
     }
