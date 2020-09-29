@@ -11,7 +11,7 @@ public class ConsoleAdminCommandMessage extends Message {
     private String command;
 
     public ConsoleAdminCommandMessage() {
-        this.id = 8193;
+        this.id = 101;
     }
 
     @Override

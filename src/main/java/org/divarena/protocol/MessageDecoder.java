@@ -55,7 +55,7 @@ public class MessageDecoder {
                 msg = new UserPrivateContentMessage();
                 break;
             }
-            case 8193: {
+            case 101: {
                 msg = new ConsoleAdminCommandMessage();
                 break;
             }
