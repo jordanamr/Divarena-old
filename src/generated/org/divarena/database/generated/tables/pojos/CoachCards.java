@@ -13,13 +13,15 @@ import java.io.Serializable;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoachCards implements Serializable {
 
-    private static final long serialVersionUID = -438437201;
+    private static final long serialVersionUID = -2000421648;
 
     private Integer id;
     private String  name;
     private Integer type;
+    private String  typeParameters;
     private Integer value;
     private Integer set;
+    private Integer requiredLevel;
 
     public CoachCards() {}
 
@@ -27,22 +29,28 @@ public class CoachCards implements Serializable {
         this.id = value.id;
         this.name = value.name;
         this.type = value.type;
+        this.typeParameters = value.typeParameters;
         this.value = value.value;
         this.set = value.set;
+        this.requiredLevel = value.requiredLevel;
     }
 
     public CoachCards(
         Integer id,
         String  name,
         Integer type,
+        String  typeParameters,
         Integer value,
-        Integer set
+        Integer set,
+        Integer requiredLevel
     ) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.typeParameters = typeParameters;
         this.value = value;
         this.set = set;
+        this.requiredLevel = requiredLevel;
     }
 
     public Integer getId() {
@@ -69,6 +77,14 @@ public class CoachCards implements Serializable {
         this.type = type;
     }
 
+    public String getTypeParameters() {
+        return this.typeParameters;
+    }
+
+    public void setTypeParameters(String typeParameters) {
+        this.typeParameters = typeParameters;
+    }
+
     public Integer getValue() {
         return this.value;
     }
@@ -85,6 +101,14 @@ public class CoachCards implements Serializable {
         this.set = set;
     }
 
+    public Integer getRequiredLevel() {
+        return this.requiredLevel;
+    }
+
+    public void setRequiredLevel(Integer requiredLevel) {
+        this.requiredLevel = requiredLevel;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("CoachCards (");
@@ -92,8 +116,10 @@ public class CoachCards implements Serializable {
         sb.append(id);
         sb.append(", ").append(name);
         sb.append(", ").append(type);
+        sb.append(", ").append(typeParameters);
         sb.append(", ").append(value);
         sb.append(", ").append(set);
+        sb.append(", ").append(requiredLevel);
 
         sb.append(")");
         return sb.toString();

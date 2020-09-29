@@ -4,6 +4,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import lombok.Getter;
 import org.divarena.database.DivarenaDatabase;
+import org.divarena.util.StringUtils;
 
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -17,44 +18,53 @@ import static org.divarena.database.generated.tables.FighterCards.FIGHTER_CARDS;
 
 public class CardsImporter {
 
+    private static boolean displayOnly = false;
     private static Config config;
     private static DivarenaDatabase database;
 
     public static void main(String[] args) throws Exception {
         config = ConfigFactory.parseFile(new File("divarena.conf"));
-        database = new DivarenaDatabase(config.getString("database.address"), config.getString("database.username"),
-                config.getString("database.password"), config.getString("database.name"), config.getInt("database.poolSize"));
-        database.connect();
+        if (!displayOnly) {
+            database = new DivarenaDatabase(config.getString("database.address"), config.getString("database.username"),
+                    config.getString("database.password"), config.getString("database.name"), config.getInt("database.poolSize"));
+            database.connect();
+        }
 
         I18NReader i18n = new I18NReader();
         ByteBuffer buffer = ByteBuffer.wrap(Files.readAllBytes(Path.of("./data/cards.dat")));
         int coachCardCount = buffer.getInt();
         System.out.println("CoachCard count: " + coachCardCount);
-        database.getDsl().truncateTable(COACH_CARDS).execute();
+        if (!displayOnly) database.getDsl().truncateTable(COACH_CARDS).execute();
         for (int i = 0; i < coachCardCount; ++i) {
             int cardId = buffer.getInt();
             int cardType = buffer.getInt();
+            float[] cardTypeParameters = readFloatArray(buffer);
             int cardValue = buffer.getInt();
             int cardSet = buffer.getInt();
+            int cardRequiredLevel = buffer.getInt();
             String cardName = i18n.getString(I18NReader.DataType.COACH_CARD_NAME, "" + cardId);
             System.out.println("----- COACH CARD ID " + cardId + " -----");
             System.out.println("Name: " + cardName);
             System.out.println("Type: " + cardType + " (" + CoachCardType.fromId(cardType).getName() + ")");
+            System.out.println("Type Parameters: " + StringUtils.fromFloatArray(cardTypeParameters));
             System.out.println("Value: " + cardValue);
             System.out.println("Set: " + cardSet);
-            database.getDsl().insertInto(COACH_CARDS)
+            System.out.println("Required Level: " + cardRequiredLevel);
+            if (!displayOnly) database.getDsl().insertInto(COACH_CARDS)
                     .set(COACH_CARDS.ID, cardId)
                     .set(COACH_CARDS.NAME, cardName)
                     .set(COACH_CARDS.TYPE, cardType)
+                    .set(COACH_CARDS.TYPE_PARAMETERS, StringUtils.fromFloatArray(cardTypeParameters))
                     .set(COACH_CARDS.VALUE, cardValue)
                     .set(COACH_CARDS.SET, cardSet)
+                    .set(COACH_CARDS.REQUIRED_LEVEL, cardRequiredLevel)
                     .execute();
         }
-        System.out.println("");
+        /*System.out.println("");
         System.out.println("");
         int fighterCardCount = buffer.getInt();
         System.out.println("FighterCard count: " + coachCardCount);
-        database.getDsl().truncateTable(FIGHTER_CARDS).execute();
+        if (!displayOnly) database.getDsl().truncateTable(FIGHTER_CARDS).execute();
         for (int i = 0; i < fighterCardCount; ++i) {
             int cardId = buffer.getInt();
             byte cardType = buffer.get();
@@ -84,7 +94,7 @@ public class CardsImporter {
             System.out.println("Allowed When Carried: " + cardWeaponAllowedWhenCarried);
             System.out.println("Allowed When Carrying: " + cardWeaponAllowedWhenCarrying);
             System.out.println("Script ID: " + cardScriptId);
-            database.getDsl().insertInto(FIGHTER_CARDS)
+            if (!displayOnly) database.getDsl().insertInto(FIGHTER_CARDS)
                     .set(FIGHTER_CARDS.ID, cardId)
                     .set(FIGHTER_CARDS.NAME, cardName)
                     .set(FIGHTER_CARDS.TYPE, cardType)
@@ -107,6 +117,7 @@ public class CardsImporter {
         System.out.println("Effect count: " + effectCount);
         for (int i = 0; i < effectCount; ++i) {
             int effectId = buffer.getInt();
+            System.out.println(effectId);
             String effectParentType = readString(buffer);
             int effectParentId = buffer.getInt();
             short ___UNUSED___ = buffer.getShort(); //TODO Unused ?
@@ -121,7 +132,7 @@ public class CardsImporter {
             int[] effectTriggersBefore = readIntArray(buffer);
             int[] effectEndTriggers = null; //TODO Not needed on cards
             boolean affectedByLocalisation = buffer.get() == (byte) 1;
-        }
+        }*/
     }
 
     private static String readString(ByteBuffer buffer) {
@@ -168,7 +179,8 @@ public class CardsImporter {
         PET_MEMBER(16, "Familier - Membre", new short[]{-1}),
         PET_HEAD(17, "Familier - Tête", new short[]{-1}),
         PET_BODY(18, "Familier - Tronc", new short[]{-1}),
-        PET_ACCESSORY(19, "Familier - Accessoire", new short[]{-1});
+        PET_ACCESSORY(19, "Familier - Accessoire", new short[]{-1}),
+        ZAAP(20, "Zaap", new short[]{-1});
 
         @Getter
         private final int id;

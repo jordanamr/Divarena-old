@@ -15,7 +15,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -31,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoachCards extends TableImpl<CoachCardsRecord> {
 
-    private static final long serialVersionUID = 1462172067;
+    private static final long serialVersionUID = -229892430;
 
     /**
      * The reference instance of <code>divarena_db.coach_cards</code>
@@ -62,6 +62,11 @@ public class CoachCards extends TableImpl<CoachCardsRecord> {
     public final TableField<CoachCardsRecord, Integer> TYPE = createField(DSL.name("type"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
+     * The column <code>divarena_db.coach_cards.type_parameters</code>.
+     */
+    public final TableField<CoachCardsRecord, String> TYPE_PARAMETERS = createField(DSL.name("type_parameters"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
      * The column <code>divarena_db.coach_cards.value</code>.
      */
     public final TableField<CoachCardsRecord, Integer> VALUE = createField(DSL.name("value"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
@@ -70,6 +75,11 @@ public class CoachCards extends TableImpl<CoachCardsRecord> {
      * The column <code>divarena_db.coach_cards.set</code>.
      */
     public final TableField<CoachCardsRecord, Integer> SET = createField(DSL.name("set"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>divarena_db.coach_cards.required_level</code>.
+     */
+    public final TableField<CoachCardsRecord, Integer> REQUIRED_LEVEL = createField(DSL.name("required_level"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>divarena_db.coach_cards</code> table reference
@@ -151,11 +161,11 @@ public class CoachCards extends TableImpl<CoachCardsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, String, Integer, Integer, Integer> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row7<Integer, String, Integer, String, Integer, Integer, Integer> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

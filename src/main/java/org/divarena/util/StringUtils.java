@@ -44,4 +44,21 @@ public class StringUtils {
         }
         return longest;
     }
+
+    public static String fromFloatArray(float[] array) {
+        if (array.length == 0) return "";
+        String str = Arrays.toString(array);
+        str = str.substring(1, str.length() - 1);
+        return str.replace(" ", "");
+    }
+
+    public static float[] toFloatArray(String str) {
+        if (str.isEmpty()) return new float[0];
+        String[] strArray = str.split(",");
+        float[] array = new float[strArray.length];
+        for (int i = 0; i < strArray.length; i++) {
+            array[i] = Float.parseFloat(strArray[i]);
+        }
+        return array;
+    }
 }

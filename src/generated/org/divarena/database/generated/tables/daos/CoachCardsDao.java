@@ -87,6 +87,20 @@ public class CoachCardsDao extends DAOImpl<CoachCardsRecord, org.divarena.databa
     }
 
     /**
+     * Fetch records that have <code>type_parameters BETWEEN lowerInclusive AND upperInclusive</code>
+     */
+    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchRangeOfTypeParameters(String lowerInclusive, String upperInclusive) {
+        return fetchRange(CoachCards.COACH_CARDS.TYPE_PARAMETERS, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>type_parameters IN (values)</code>
+     */
+    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchByTypeParameters(String... values) {
+        return fetch(CoachCards.COACH_CARDS.TYPE_PARAMETERS, values);
+    }
+
+    /**
      * Fetch records that have <code>value BETWEEN lowerInclusive AND upperInclusive</code>
      */
     public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchRangeOfValue(Integer lowerInclusive, Integer upperInclusive) {
@@ -112,5 +126,19 @@ public class CoachCardsDao extends DAOImpl<CoachCardsRecord, org.divarena.databa
      */
     public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchBySet(Integer... values) {
         return fetch(CoachCards.COACH_CARDS.SET, values);
+    }
+
+    /**
+     * Fetch records that have <code>required_level BETWEEN lowerInclusive AND upperInclusive</code>
+     */
+    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchRangeOfRequiredLevel(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(CoachCards.COACH_CARDS.REQUIRED_LEVEL, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>required_level IN (values)</code>
+     */
+    public List<org.divarena.database.generated.tables.pojos.CoachCards> fetchByRequiredLevel(Integer... values) {
+        return fetch(CoachCards.COACH_CARDS.REQUIRED_LEVEL, values);
     }
 }
