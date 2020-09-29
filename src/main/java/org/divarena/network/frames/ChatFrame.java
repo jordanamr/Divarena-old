@@ -50,7 +50,7 @@ public class ChatFrame extends Frame {
                 }
                 return true;
             }
-            case 8193: {
+            case 101: {
                 ConsoleAdminCommandMessage msg = (ConsoleAdminCommandMessage) message;
                 String[] text = msg.getCommand().split(" ");
                 Command command = CommandManager.getInstance().getCommand(text[0].toLowerCase());
