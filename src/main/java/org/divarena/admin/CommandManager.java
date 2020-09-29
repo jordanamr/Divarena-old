@@ -27,6 +27,7 @@ public class CommandManager {
         commands.put("tppos", new TpPosCommand("tppos"));
         commands.put("givecard", new GiveCardCommand("givecard"));
         commands.put("list", new ListCommand("list"));
+        commands.put("pos", new PosCommand("pos"));
     }
 
     public Command getCommand(String alias) {
