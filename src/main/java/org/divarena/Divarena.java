@@ -13,6 +13,7 @@ import org.divarena.logging.UncaughtExceptionLogger;
 import org.divarena.network.ArenaClient;
 import org.divarena.game.instances.Instance;
 import org.divarena.game.instances.WorldInstance;
+import org.divarena.util.StringUtils;
 
 import java.io.File;
 import java.util.*;
@@ -66,7 +67,8 @@ public class Divarena {
 
         log.info("Loading CoachCards from database...");
         database.getCoachCardsDao().findAll().forEach(pojo -> {
-            CoachCard coachCard = new CoachCard(pojo.getId(), pojo.getName(), pojo.getType(), pojo.getValue());
+            CoachCard coachCard = new CoachCard(pojo.getId(), pojo.getName(), pojo.getType(), pojo.getValue(),
+                    StringUtils.toFloatArray(pojo.getTypeParameters()), pojo.getRequiredLevel());
             coachCards.put(pojo.getId(), coachCard);
         });
         log.info(coachCards.size() + " CoachCards loaded");
