@@ -60,7 +60,7 @@ public class CardsImporter {
                     .set(COACH_CARDS.REQUIRED_LEVEL, cardRequiredLevel)
                     .execute();
         }
-        /*System.out.println("");
+        System.out.println("");
         System.out.println("");
         int fighterCardCount = buffer.getInt();
         System.out.println("FighterCard count: " + coachCardCount);
@@ -111,7 +111,7 @@ public class CardsImporter {
                     .set(FIGHTER_CARDS.SCRIPT_ID, cardScriptId)
                     .execute();
         }
-        System.out.println("");
+        /*System.out.println("");
         System.out.println("");
         int effectCount = buffer.getInt();
         System.out.println("Effect count: " + effectCount);
