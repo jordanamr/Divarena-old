@@ -29,7 +29,7 @@ public class ChatFrame extends Frame {
         switch (message.getId()) {
             case 3153: {
                 UserVicinityContentMessage msg = (UserVicinityContentMessage) message;
-                client.getInstance().broadcastMessage(client.getCoach(), msg.getMessage());
+                client.getInstance().chat(client.getCoach(), msg.getMessage());
                 return true;
             }
             case 3155: {

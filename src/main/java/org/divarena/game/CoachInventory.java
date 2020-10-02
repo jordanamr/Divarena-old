@@ -20,6 +20,10 @@ public class CoachInventory {
         if (inventory.length != 0) deserialize(inventory);
     }
 
+    public boolean contains(int cardId) {
+        return contents.keySet().stream().anyMatch(card -> card.getId() == cardId);
+    }
+
     public void add(CoachCard card) {
         contents.put(card, (short) 1);
     }

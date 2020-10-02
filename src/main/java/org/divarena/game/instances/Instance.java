@@ -2,6 +2,7 @@ package org.divarena.game.instances;
 
 import lombok.Getter;
 import org.divarena.game.Coach;
+import org.divarena.protocol.Message;
 import org.divarena.protocol.server.world.ActorDespawnMessage;
 import org.divarena.protocol.server.world.ActorSpawnMessage;
 import org.divarena.protocol.server.chat.VicinityContentMessage;
@@ -21,7 +22,7 @@ public abstract class Instance {
     }
 
     public void addMember(Coach coach) {
-        coach.getClient().sendMessage(new ActorSpawnMessage(members.toArray(new Coach[0])));
+        if (!members.isEmpty()) coach.getClient().sendMessage(new ActorSpawnMessage(members.toArray(new Coach[0])));
         members.forEach(coaches -> coaches.getClient().sendMessage(new ActorSpawnMessage(coach)));
         members.add(coach);
     }
@@ -38,7 +39,7 @@ public abstract class Instance {
         return members.contains(coach);
     }
 
-    public void broadcastMessage(Coach coach, String message) {
+    public void chat(Coach coach, String message) {
         VicinityContentMessage msg = new VicinityContentMessage();
         msg.setMemberTalking(coach.getName());
         msg.setMemberID(coach.getId());
@@ -47,5 +48,9 @@ public abstract class Instance {
             if (coaches.getId() == msg.getMemberID()) return;
             coaches.getClient().sendMessage(msg);
         });
+    }
+
+    public void broadcast(Message message) {
+        members.forEach(coaches -> coaches.getClient().sendMessage(message));
     }
 }

@@ -8,10 +8,12 @@ import org.divarena.network.Frame;
 import org.divarena.game.instances.WorldInstance;
 import org.divarena.protocol.Message;
 import org.divarena.protocol.client.coach.CoachEquipmentUpdateRequestMessage;
+import org.divarena.protocol.client.world.CoachActorEmoteRequestMessage;
 import org.divarena.protocol.client.world.CoachActorMovementRequestMessage;
 import org.divarena.protocol.client.world.ResetPositionRequestMessage;
 import org.divarena.protocol.server.coach.CoachEquipmentUpdateMessage;
 import org.divarena.protocol.server.coach.CoachInventoryUpdateMessage;
+import org.divarena.protocol.server.world.ActorEmoteMessage;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -45,6 +47,18 @@ public class WorldFrame extends Frame {
             }
             case 4514: {
                 ResetPositionRequestMessage msg = (ResetPositionRequestMessage) message; //TODO ?????
+                return true;
+            }
+            case 4701: {
+                CoachActorEmoteRequestMessage msg = (CoachActorEmoteRequestMessage) message;
+                if (!client.getCoach().getInventory().contains(msg.getCardId())) {
+                    client.log("ALERT! Trying to play an emote not owned");
+                    return false;
+                }
+                ActorEmoteMessage response = new ActorEmoteMessage();
+                response.setCoachId(client.getCoach().getId());
+                response.setEmote(msg.getEmote()); //TODO Check if emote string corresponds to the card
+                client.getInstance().broadcast(response);
                 return true;
             }
             case 5201: {

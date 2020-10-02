@@ -79,6 +79,10 @@ public class MessageDecoder {
                 msg = new CreateFighterInformationRequestMessage();
                 break;
             }
+            case 4701: {
+                msg = new CoachActorEmoteRequestMessage();
+                break;
+            }
         }
         if (msg == null) {
             client.log("Unknown message id " + id + ", full message: " + Arrays.toString(data));
