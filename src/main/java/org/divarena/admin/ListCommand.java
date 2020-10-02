@@ -17,6 +17,7 @@ public class ListCommand extends Command {
         Iterator<ArenaClient> it = Divarena.getInstance().getClients().iterator();
         while (it.hasNext()) {
             ArenaClient onlineClient = it.next();
+            if (onlineClient.getAccountName() == null) continue;
             builder.append(onlineClient.getCoachName());
             builder.append(" (");
             builder.append(onlineClient.getAccountName());
