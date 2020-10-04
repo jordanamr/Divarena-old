@@ -8,6 +8,7 @@ import org.divarena.database.generated.tables.Accounts;
 import org.divarena.database.generated.tables.CoachCards;
 import org.divarena.database.generated.tables.Coaches;
 import org.divarena.database.generated.tables.Counts;
+import org.divarena.database.generated.tables.Effects;
 import org.divarena.database.generated.tables.FighterCards;
 import org.divarena.database.generated.tables.Spells;
 
@@ -37,6 +38,11 @@ public class Tables {
      * The table <code>divarena_db.counts</code>.
      */
     public static final Counts COUNTS = Counts.COUNTS;
+
+    /**
+     * The table <code>divarena_db.effects</code>.
+     */
+    public static final Effects EFFECTS = Effects.EFFECTS;
 
     /**
      * The table <code>divarena_db.fighter_cards</code>.

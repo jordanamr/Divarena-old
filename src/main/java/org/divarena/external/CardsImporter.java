@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 import static org.divarena.database.generated.tables.CoachCards.COACH_CARDS;
 import static org.divarena.database.generated.tables.FighterCards.FIGHTER_CARDS;
+import static org.divarena.database.generated.tables.Effects.EFFECTS;
 
 public class CardsImporter {
 
@@ -111,15 +112,14 @@ public class CardsImporter {
                     .set(FIGHTER_CARDS.SCRIPT_ID, cardScriptId)
                     .execute();
         }
-        /*System.out.println("");
+        System.out.println("");
         System.out.println("");
         int effectCount = buffer.getInt();
         System.out.println("Effect count: " + effectCount);
-        for (int i = 0; i < effectCount; ++i) {
-            int effectId = buffer.getInt();
-            System.out.println(effectId);
-            String effectParentType = readString(buffer);
-            int effectParentId = buffer.getInt();
+        for (int i = 0; i < effectCount; ++i) { // Buffer - EffectContentDocumentLoader
+            int effectId = buffer.getInt(); // Effect ID
+            String effectParentType = readString(buffer); // Effect Parent type (trigger?) enum
+            int effectParentId = buffer.getInt(); // Parent ID (card ID in this case)
             short ___UNUSED___ = buffer.getShort(); //TODO Unused ?
             int[] effectDuration = readIntArray(buffer);
             int effectActionId = buffer.getInt();
@@ -130,9 +130,39 @@ public class CardsImporter {
             int[] effectTargets = readIntArray(buffer);
             int[] effectTriggersAfter = readIntArray(buffer);
             int[] effectTriggersBefore = readIntArray(buffer);
-            int[] effectEndTriggers = null; //TODO Not needed on cards
+            int[] effectEndTriggers = null; //TODO Unused ?
             boolean affectedByLocalisation = buffer.get() == (byte) 1;
-        }*/
+            System.out.println("----- EFFECT ID " + effectId + " -----");
+            System.out.println("Parent Type: " + effectParentType);
+            System.out.println("Parent ID: " + effectParentId);
+            System.out.println("Duration: " + Arrays.toString(effectDuration));
+            System.out.println("Action ID: " + effectActionId);
+            System.out.println("Is Critical: " + effectIsCritical);
+            System.out.println("Params: " + Arrays.toString(effectParams));
+            System.out.println("Area Shape: " + effectAreaShape);
+            System.out.println("Area Size: " + Arrays.toString(effectAreaSize));
+            System.out.println("Targets: " + Arrays.toString(effectTargets));
+            System.out.println("Triggers After: " + Arrays.toString(effectTriggersAfter));
+            System.out.println("Triggers Before: " + Arrays.toString(effectTriggersBefore));
+            System.out.println("End Triggers: " + Arrays.toString(effectEndTriggers));
+            System.out.println("Affected By Localisation: " + affectedByLocalisation);
+            if (!displayOnly) database.getDsl().insertInto(EFFECTS)
+                    .set(EFFECTS.ID, effectId)
+                    .set(EFFECTS.PARENT_TYPE, effectParentType)
+                    .set(EFFECTS.PARENT_ID, effectParentId)
+                    .set(EFFECTS.DURATION, StringUtils.fromIntArray(effectDuration))
+                    .set(EFFECTS.ACTION_ID, effectActionId)
+                    .set(EFFECTS.CRITICAL, effectIsCritical ? (byte) 1 : (byte) 0)
+                    .set(EFFECTS.PARAMS, StringUtils.fromFloatArray(effectParams))
+                    .set(EFFECTS.AREA_SHAPE, effectAreaShape)
+                    .set(EFFECTS.AREA_SIZE, StringUtils.fromIntArray(effectAreaSize))
+                    .set(EFFECTS.TARGETS, StringUtils.fromIntArray(effectTargets))
+                    .set(EFFECTS.TRIGGERS_AFTER, StringUtils.fromIntArray(effectTriggersAfter))
+                    .set(EFFECTS.TRIGGERS_BEFORE, StringUtils.fromIntArray(effectTriggersBefore))
+                    .set(EFFECTS.END_TRIGGERS, StringUtils.fromIntArray(effectEndTriggers))
+                    .set(EFFECTS.AFFECTED_BY_LOCALISATION, affectedByLocalisation ? (byte) 1 : (byte) 0)
+                    .execute();
+        }
     }
 
     private static String readString(ByteBuffer buffer) {

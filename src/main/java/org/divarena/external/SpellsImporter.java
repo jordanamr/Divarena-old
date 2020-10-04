@@ -3,17 +3,21 @@ package org.divarena.external;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.divarena.database.DivarenaDatabase;
+import org.divarena.util.StringUtils;
 
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
+import static org.divarena.database.generated.tables.Effects.EFFECTS;
 import static org.divarena.database.generated.tables.Spells.SPELLS;
 
 public class SpellsImporter {
 
+    private static boolean displayOnly = false;
     private static Config config;
     private static DivarenaDatabase database;
 
@@ -27,7 +31,7 @@ public class SpellsImporter {
         ByteBuffer buffer = ByteBuffer.wrap(Files.readAllBytes(Path.of("./data/spells.dat")));
         int spellsCount = buffer.getInt();
         System.out.println("Spell count: " + spellsCount);
-        database.getDsl().truncateTable(SPELLS).execute();
+        if (!displayOnly) database.getDsl().truncateTable(SPELLS).execute();
         for (int i = 0; i < spellsCount; ++i) {
             int spellId = buffer.getInt();
             byte spellActionPoints = buffer.get();
@@ -63,7 +67,7 @@ public class SpellsImporter {
             System.out.println("Breed ID: " + breedId);
             System.out.println("Criterion: " + criterionString);
             System.out.println("Automatic Description: " + useAutomaticDescription);
-            database.getDsl().insertInto(SPELLS)
+            if (!displayOnly) database.getDsl().insertInto(SPELLS)
                     .set(SPELLS.ID, spellId)
                     .set(SPELLS.NAME, spellName)
                     .set(SPELLS.AP, spellActionPoints)
@@ -87,12 +91,11 @@ public class SpellsImporter {
         System.out.println("");
         int effectCount = buffer.getInt();
         System.out.println("Effect count: " + effectCount);
-        for (int i = 0; i < effectCount; ++i) {
-            int effectId = buffer.getInt();
-            String effectParentType = readString(buffer);
-            int effectParentId = buffer.getInt();
+        for (int i = 0; i < effectCount; ++i) { // Buffer - EffectContentDocumentLoader
+            int effectId = buffer.getInt(); // Effect ID
+            String effectParentType = readString(buffer); // Effect Parent type (trigger?) enum
+            int effectParentId = buffer.getInt(); // Parent ID (card ID in this case)
             short ___UNUSED___ = buffer.getShort(); //TODO Unused ?
-            System.out.println("Effect ID: " + effectId + " Unused: " + ___UNUSED___);
             int[] effectDuration = readIntArray(buffer);
             int effectActionId = buffer.getInt();
             boolean effectIsCritical = buffer.get() == (byte) 1;
@@ -102,10 +105,39 @@ public class SpellsImporter {
             int[] effectTargets = readIntArray(buffer);
             int[] effectTriggersAfter = readIntArray(buffer);
             int[] effectTriggersBefore = readIntArray(buffer);
-            int[] effectEndTriggers = null; //TODO Not needed on cards
+            int[] effectEndTriggers = null; //TODO Unused ?
             boolean affectedByLocalisation = buffer.get() == (byte) 1;
+            System.out.println("----- EFFECT ID " + effectId + " -----");
+            System.out.println("Parent Type: " + effectParentType);
+            System.out.println("Parent ID: " + effectParentId);
+            System.out.println("Duration: " + Arrays.toString(effectDuration));
+            System.out.println("Action ID: " + effectActionId);
+            System.out.println("Is Critical: " + effectIsCritical);
+            System.out.println("Params: " + Arrays.toString(effectParams));
+            System.out.println("Area Shape: " + effectAreaShape);
+            System.out.println("Area Size: " + Arrays.toString(effectAreaSize));
+            System.out.println("Targets: " + Arrays.toString(effectTargets));
+            System.out.println("Triggers After: " + Arrays.toString(effectTriggersAfter));
+            System.out.println("Triggers Before: " + Arrays.toString(effectTriggersBefore));
+            System.out.println("End Triggers: " + Arrays.toString(effectEndTriggers));
+            System.out.println("Affected By Localisation: " + affectedByLocalisation);
+            if (!displayOnly) database.getDsl().insertInto(EFFECTS)
+                    .set(EFFECTS.ID, effectId)
+                    .set(EFFECTS.PARENT_TYPE, effectParentType)
+                    .set(EFFECTS.PARENT_ID, effectParentId)
+                    .set(EFFECTS.DURATION, StringUtils.fromIntArray(effectDuration))
+                    .set(EFFECTS.ACTION_ID, effectActionId)
+                    .set(EFFECTS.CRITICAL, effectIsCritical ? (byte) 1 : (byte) 0)
+                    .set(EFFECTS.PARAMS, StringUtils.fromFloatArray(effectParams))
+                    .set(EFFECTS.AREA_SHAPE, effectAreaShape)
+                    .set(EFFECTS.AREA_SIZE, StringUtils.fromIntArray(effectAreaSize))
+                    .set(EFFECTS.TARGETS, StringUtils.fromIntArray(effectTargets))
+                    .set(EFFECTS.TRIGGERS_AFTER, StringUtils.fromIntArray(effectTriggersAfter))
+                    .set(EFFECTS.TRIGGERS_BEFORE, StringUtils.fromIntArray(effectTriggersBefore))
+                    .set(EFFECTS.END_TRIGGERS, StringUtils.fromIntArray(effectEndTriggers))
+                    .set(EFFECTS.AFFECTED_BY_LOCALISATION, affectedByLocalisation ? (byte) 1 : (byte) 0)
+                    .execute();
         }
-        //TODO La flemme bordel de merde je suis fatigué et dépressif
     }
 
     private static String readString(ByteBuffer buffer) {

@@ -46,7 +46,7 @@ public class StringUtils {
     }
 
     public static String fromFloatArray(float[] array) {
-        if (array.length == 0) return "";
+        if (array == null || array.length == 0) return "";
         String str = Arrays.toString(array);
         str = str.substring(1, str.length() - 1);
         return str.replace(" ", "");
@@ -58,6 +58,23 @@ public class StringUtils {
         float[] array = new float[strArray.length];
         for (int i = 0; i < strArray.length; i++) {
             array[i] = Float.parseFloat(strArray[i]);
+        }
+        return array;
+    }
+
+    public static String fromIntArray(int[] array) {
+        if (array == null || array.length == 0) return "";
+        String str = Arrays.toString(array);
+        str = str.substring(1, str.length() - 1);
+        return str.replace(" ", "");
+    }
+
+    public static int[] toIntArray(String str) {
+        if (str.isEmpty()) return new int[0];
+        String[] strArray = str.split(",");
+        int[] array = new int[strArray.length];
+        for (int i = 0; i < strArray.length; i++) {
+            array[i] = Integer.parseInt(strArray[i]);
         }
         return array;
     }
