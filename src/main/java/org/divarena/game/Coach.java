@@ -1,7 +1,6 @@
 package org.divarena.game;
 
 import com.github.simplenet.packet.Packet;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.divarena.Divarena;
@@ -10,7 +9,6 @@ import org.divarena.database.generated.tables.pojos.Coaches;
 import org.divarena.game.cards.CoachCard;
 import org.divarena.network.ArenaClient;
 
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.HashMap;
